@@ -1,0 +1,224 @@
+CREATE TABLE bank_employee (
+  uuid             uuid NOT NULL,
+  clothe_bank_uuid uuid NOT NULL,
+  user_uuid        uuid NOT NULL,
+  PRIMARY KEY (uuid),
+  CONSTRAINT unique_bank_employee
+    UNIQUE (clothe_bank_uuid, user_uuid));
+CREATE TABLE city (
+  uuid            uuid NOT NULL,
+  name            varchar(255) NOT NULL,
+  department_uuid uuid NOT NULL,
+  PRIMARY KEY (uuid),
+  CONSTRAINT unique_department
+    UNIQUE (name, department_uuid));
+CREATE TABLE clothe (
+  uuid             uuid NOT NULL,
+  type_clothe_uuid uuid NOT NULL,
+  type_gender_uuid uuid NOT NULL,
+  type_stage_uuid  uuid NOT NULL,
+  PRIMARY KEY (uuid),
+  CONSTRAINT unique_clothe
+    UNIQUE (type_clothe_uuid, type_gender_uuid, type_stage_uuid));
+CREATE TABLE clothe_bank (
+  uuid            uuid NOT NULL,
+  name            varchar(255) NOT NULL,
+  address         varchar(255) NOT NULL UNIQUE,
+  foundation_uuid uuid NOT NULL,
+  city_uuid       uuid NOT NULL,
+  PRIMARY KEY (uuid));
+CREATE TABLE contact_user (
+  uuid      uuid NOT NULL,
+  name      varchar(255) NOT NULL,
+  last_name varchar(255) NOT NULL,
+  phone     int4 NOT NULL UNIQUE,
+  email     varchar(255) NOT NULL UNIQUE,
+  PRIMARY KEY (uuid));
+CREATE TABLE department (
+  uuid uuid NOT NULL,
+  name varchar(255) NOT NULL UNIQUE,
+  PRIMARY KEY (uuid));
+CREATE TABLE foundation (
+  uuid                 uuid NOT NULL,
+  name                 varchar(255) NOT NULL,
+  nit                  int4 NOT NULL UNIQUE,
+  legal_representative varchar(255) NOT NULL,
+  phone                int4 NOT NULL UNIQUE,
+  email                varchar(255) NOT NULL UNIQUE,
+  creation_date        date NOT NULL,
+  type_meet_us_uuid    uuid NOT NULL,
+  contact_user_uuid    uuid NOT NULL,
+  PRIMARY KEY (uuid));
+CREATE TABLE foundation_employee (
+  uuid            uuid NOT NULL,
+  foundation_uuid uuid NOT NULL,
+  user_uuid       uuid NOT NULL,
+  PRIMARY KEY (uuid),
+  CONSTRAINT unique_employe
+    UNIQUE (foundation_uuid, user_uuid));
+CREATE TABLE inventory (
+  uuid          uuid NOT NULL,
+  stock         int4 NOT NULL,
+  minimun_stock int4 NOT NULL,
+  value         int4 NOT NULL,
+  wardrope_uuid uuid NOT NULL,
+  clothe_uuid   uuid NOT NULL,
+  PRIMARY KEY (uuid),
+  CONSTRAINT unique_inventory
+    UNIQUE (wardrope_uuid, clothe_uuid));
+CREATE TABLE "order" (
+  uuid             uuid NOT NULL,
+  order_date       date NOT NULL,
+  delivery_date    date,
+  wardrope_uuid    uuid NOT NULL,
+  order_state_uuid uuid NOT NULL,
+  PRIMARY KEY (uuid));
+CREATE TABLE order_list (
+  uuid           uuid NOT NULL,
+  order_uuid     uuid NOT NULL,
+  clothe_uuid    uuid NOT NULL,
+  value_order    int4 NOT NULL,
+  delivery_value int4,
+  PRIMARY KEY (uuid),
+  CONSTRAINT unique_order_list
+    UNIQUE (order_uuid, clothe_uuid));
+CREATE TABLE order_state (
+  uuid uuid NOT NULL,
+  name varchar(255) NOT NULL UNIQUE,
+  PRIMARY KEY (uuid));
+CREATE TABLE role (
+  uuid uuid NOT NULL,
+  name varchar(255) NOT NULL UNIQUE,
+  PRIMARY KEY (uuid));
+CREATE TABLE sale (
+  uuid          uuid NOT NULL,
+  value         int4 NOT NULL,
+  sale_date     date NOT NULL,
+  wardrope_uuid uuid NOT NULL,
+  user_uuid     uuid NOT NULL,
+  PRIMARY KEY (uuid));
+CREATE TABLE sale_list (
+  uuid        uuid NOT NULL,
+  sale_uuid   uuid NOT NULL,
+  clothe_uuid uuid NOT NULL,
+  value       int4 NOT NULL,
+  PRIMARY KEY (uuid),
+  CONSTRAINT unique_sale_list
+    UNIQUE (clothe_uuid, sale_uuid));
+CREATE TABLE type_clothe (
+  uuid uuid NOT NULL,
+  name varchar(255) NOT NULL UNIQUE,
+  PRIMARY KEY (uuid));
+CREATE TABLE type_document (
+  uuid uuid NOT NULL,
+  name varchar(255) NOT NULL UNIQUE,
+  PRIMARY KEY (uuid));
+CREATE TABLE type_gender (
+  uuid uuid NOT NULL,
+  name varchar(255) NOT NULL UNIQUE,
+  PRIMARY KEY (uuid));
+CREATE TABLE type_meet_us (
+  uuid uuid NOT NULL,
+  name varchar(255) NOT NULL UNIQUE,
+  PRIMARY KEY (uuid));
+CREATE TABLE type_stage (
+  uuid uuid NOT NULL,
+  name varchar(255) NOT NULL UNIQUE,
+  PRIMARY KEY (uuid));
+CREATE TABLE "user" (
+  uuid               uuid NOT NULL,
+  name               varchar(255) NOT NULL,
+  last_name          varchar(255) NOT NULL,
+  user_name          varchar(255) NOT NULL UNIQUE,
+  email              varchar(255) NOT NULL UNIQUE,
+  phone              varchar(255) NOT NULL UNIQUE,
+  points             int4 NOT NULL,
+  creation_date      date NOT NULL,
+  role_uuid          uuid NOT NULL,
+  type_document_uuid uuid NOT NULL,
+  PRIMARY KEY (uuid));
+CREATE TABLE wardrope (
+  uuid             uuid NOT NULL,
+  name             varchar(255) NOT NULL UNIQUE,
+  creation_date    date NOT NULL,
+  address          varchar(255) NOT NULL,
+  clothe_bank_uuid uuid NOT NULL,
+  city_uuid        uuid NOT NULL,
+  PRIMARY KEY (uuid));
+ALTER TABLE "user" ADD CONSTRAINT FKuser777402 FOREIGN KEY (role_uuid) REFERENCES role (uuid);
+ALTER TABLE "user" ADD CONSTRAINT FKuser280514 FOREIGN KEY (type_document_uuid) REFERENCES type_document (uuid);
+ALTER TABLE foundation ADD CONSTRAINT FKfoundation264417 FOREIGN KEY (type_meet_us_uuid) REFERENCES type_meet_us (uuid);
+ALTER TABLE foundation ADD CONSTRAINT FKfoundation994527 FOREIGN KEY (contact_user_uuid) REFERENCES contact_user (uuid);
+ALTER TABLE clothe_bank ADD CONSTRAINT FKclothe_ban756133 FOREIGN KEY (foundation_uuid) REFERENCES foundation (uuid);
+ALTER TABLE wardrope ADD CONSTRAINT FKwardrope182079 FOREIGN KEY (clothe_bank_uuid) REFERENCES clothe_bank (uuid);
+ALTER TABLE clothe ADD CONSTRAINT FKclothe666336 FOREIGN KEY (type_clothe_uuid) REFERENCES type_clothe (uuid);
+ALTER TABLE clothe ADD CONSTRAINT FKclothe357824 FOREIGN KEY (type_gender_uuid) REFERENCES type_gender (uuid);
+ALTER TABLE clothe ADD CONSTRAINT FKclothe473859 FOREIGN KEY (type_stage_uuid) REFERENCES type_stage (uuid);
+ALTER TABLE inventory ADD CONSTRAINT FKinventory608578 FOREIGN KEY (wardrope_uuid) REFERENCES wardrope (uuid);
+ALTER TABLE inventory ADD CONSTRAINT FKinventory839796 FOREIGN KEY (clothe_uuid) REFERENCES clothe (uuid);
+ALTER TABLE "order" ADD CONSTRAINT FKorder755075 FOREIGN KEY (wardrope_uuid) REFERENCES wardrope (uuid);
+ALTER TABLE clothe_bank ADD CONSTRAINT FKclothe_ban707995 FOREIGN KEY (city_uuid) REFERENCES city (uuid);
+ALTER TABLE wardrope ADD CONSTRAINT FKwardrope386367 FOREIGN KEY (city_uuid) REFERENCES city (uuid);
+ALTER TABLE "order" ADD CONSTRAINT FKorder511428 FOREIGN KEY (order_state_uuid) REFERENCES order_state (uuid);
+ALTER TABLE order_list ADD CONSTRAINT FKorder_list231642 FOREIGN KEY (order_uuid) REFERENCES "order" (uuid);
+ALTER TABLE order_list ADD CONSTRAINT FKorder_list641945 FOREIGN KEY (clothe_uuid) REFERENCES clothe (uuid);
+ALTER TABLE sale ADD CONSTRAINT FKsale238897 FOREIGN KEY (wardrope_uuid) REFERENCES wardrope (uuid);
+ALTER TABLE sale ADD CONSTRAINT FKsale292186 FOREIGN KEY (user_uuid) REFERENCES "user" (uuid);
+ALTER TABLE sale_list ADD CONSTRAINT FKsale_list6072 FOREIGN KEY (sale_uuid) REFERENCES sale (uuid);
+ALTER TABLE sale_list ADD CONSTRAINT FKsale_list735000 FOREIGN KEY (clothe_uuid) REFERENCES clothe (uuid);
+ALTER TABLE foundation_employee ADD CONSTRAINT FKfoundation789168 FOREIGN KEY (foundation_uuid) REFERENCES foundation (uuid);
+ALTER TABLE foundation_employee ADD CONSTRAINT FKfoundation852645 FOREIGN KEY (user_uuid) REFERENCES "user" (uuid);
+ALTER TABLE city ADD CONSTRAINT FKcity972336 FOREIGN KEY (department_uuid) REFERENCES department (uuid);
+ALTER TABLE bank_employee ADD CONSTRAINT FKbank_emplo818065 FOREIGN KEY (clothe_bank_uuid) REFERENCES clothe_bank (uuid);
+ALTER TABLE bank_employee ADD CONSTRAINT FKbank_emplo76175 FOREIGN KEY (user_uuid) REFERENCES "user" (uuid);
+
+-------------------------------------------------------------------------------------------------
+
+ALTER TABLE "user" DROP CONSTRAINT FKuser777402;
+ALTER TABLE "user" DROP CONSTRAINT FKuser280514;
+ALTER TABLE foundation DROP CONSTRAINT FKfoundation264417;
+ALTER TABLE foundation DROP CONSTRAINT FKfoundation994527;
+ALTER TABLE clothe_bank DROP CONSTRAINT FKclothe_ban756133;
+ALTER TABLE wardrope DROP CONSTRAINT FKwardrope182079;
+ALTER TABLE clothe DROP CONSTRAINT FKclothe666336;
+ALTER TABLE clothe DROP CONSTRAINT FKclothe357824;
+ALTER TABLE clothe DROP CONSTRAINT FKclothe400217;
+ALTER TABLE inventory DROP CONSTRAINT FKinventory608578;
+ALTER TABLE inventory DROP CONSTRAINT FKinventory839796;
+ALTER TABLE "order" DROP CONSTRAINT FKorder755075;
+ALTER TABLE clothe_bank DROP CONSTRAINT FKclothe_ban707995;
+ALTER TABLE wardrope DROP CONSTRAINT FKwardrope386367;
+ALTER TABLE "order" DROP CONSTRAINT FKorder511428;
+ALTER TABLE order_list DROP CONSTRAINT FKorder_list231642;
+ALTER TABLE order_list DROP CONSTRAINT FKorder_list641945;
+ALTER TABLE sale DROP CONSTRAINT FKsale238897;
+ALTER TABLE sale DROP CONSTRAINT FKsale292186;
+ALTER TABLE sale_list DROP CONSTRAINT FKsale_list6072;
+ALTER TABLE sale_list DROP CONSTRAINT FKsale_list735000;
+ALTER TABLE foundation_employee DROP CONSTRAINT FKfoundation789168;
+ALTER TABLE foundation_employee DROP CONSTRAINT FKfoundation852645;
+ALTER TABLE city DROP CONSTRAINT FKcity972336;
+ALTER TABLE bank_employee DROP CONSTRAINT FKbank_emplo745948;
+ALTER TABLE bank_employee DROP CONSTRAINT FKbank_emplo76175;
+DROP TABLE IF EXISTS bank_employee CASCADE;
+DROP TABLE IF EXISTS city CASCADE;
+DROP TABLE IF EXISTS clothe CASCADE;
+DROP TABLE IF EXISTS clothe_bank CASCADE;
+DROP TABLE IF EXISTS contact_user CASCADE;
+DROP TABLE IF EXISTS department CASCADE;
+DROP TABLE IF EXISTS foundation CASCADE;
+DROP TABLE IF EXISTS foundation_employee CASCADE;
+DROP TABLE IF EXISTS inventory CASCADE;
+DROP TABLE IF EXISTS "order" CASCADE;
+DROP TABLE IF EXISTS order_list CASCADE;
+DROP TABLE IF EXISTS order_state CASCADE;
+DROP TABLE IF EXISTS role CASCADE;
+DROP TABLE IF EXISTS sale CASCADE;
+DROP TABLE IF EXISTS sale_list CASCADE;
+DROP TABLE IF EXISTS type_clothe CASCADE;
+DROP TABLE IF EXISTS type_document CASCADE;
+DROP TABLE IF EXISTS type_gender CASCADE;
+DROP TABLE IF EXISTS type_meet_us CASCADE;
+DROP TABLE IF EXISTS typestage CASCADE;
+DROP TABLE IF EXISTS "user" CASCADE;
+DROP TABLE IF EXISTS wardrope CASCADE;
