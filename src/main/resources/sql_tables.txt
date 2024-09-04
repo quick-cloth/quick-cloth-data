@@ -59,8 +59,7 @@ CREATE TABLE foundation_employee (
 CREATE TABLE inventory (
   uuid          uuid NOT NULL,
   stock         int4 NOT NULL,
-  minimun_stock int4 NOT NULL,
-  value         int4 NOT NULL,
+  minimum_stock int4 NOT NULL,
   wardrope_uuid uuid NOT NULL,
   clothe_uuid   uuid NOT NULL,
   PRIMARY KEY (uuid),
