@@ -31,7 +31,7 @@ CREATE TABLE contact_user (
   uuid      uuid NOT NULL,
   name      varchar(255) NOT NULL,
   last_name varchar(255) NOT NULL,
-  phone     int4 NOT NULL UNIQUE,
+  phone     bigint NOT NULL UNIQUE,
   email     varchar(255) NOT NULL UNIQUE,
   PRIMARY KEY (uuid));
 CREATE TABLE department (
@@ -41,9 +41,9 @@ CREATE TABLE department (
 CREATE TABLE foundation (
   uuid                 uuid NOT NULL,
   name                 varchar(255) NOT NULL,
-  nit                  int4 NOT NULL UNIQUE,
+  nit                  bigint NOT NULL UNIQUE,
   legal_representative varchar(255) NOT NULL,
-  phone                int4 NOT NULL UNIQUE,
+  phone                bigint NOT NULL UNIQUE,
   email                varchar(255) NOT NULL UNIQUE,
   creation_date        date NOT NULL,
   type_meet_us_uuid    uuid NOT NULL,
@@ -124,7 +124,7 @@ CREATE TABLE type_stage (
   uuid uuid NOT NULL,
   name varchar(255) NOT NULL UNIQUE,
   PRIMARY KEY (uuid));
-CREATE TABLE "user" (
+CREATE TABLE user_app (
   uuid               uuid NOT NULL,
   name               varchar(255) NOT NULL,
   last_name          varchar(255) NOT NULL,
@@ -135,6 +135,7 @@ CREATE TABLE "user" (
   creation_date      date NOT NULL,
   role_uuid          uuid NOT NULL,
   type_document_uuid uuid NOT NULL,
+  document           bigint NOT NULL UNIQUE,
   PRIMARY KEY (uuid));
 CREATE TABLE wardrope (
   uuid             uuid NOT NULL,

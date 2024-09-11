@@ -8,4 +8,5 @@ import java.util.UUID;
 
 @Repository
 public interface ITypeMeetUsRepository extends JpaRepository<TypeMeetUs, UUID> {
+    TypeMeetUs findByName(String name);
 }

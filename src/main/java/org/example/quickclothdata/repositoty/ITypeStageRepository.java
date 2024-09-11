@@ -8,4 +8,5 @@ import java.util.UUID;
 
 @Repository
 public interface ITypeStageRepository extends JpaRepository<TypeStage, UUID> {
+    TypeStage findByName(String name);
 }

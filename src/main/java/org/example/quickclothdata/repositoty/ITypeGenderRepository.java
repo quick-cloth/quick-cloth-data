@@ -8,4 +8,5 @@ import java.util.UUID;
 
 @Repository
 public interface ITypeGenderRepository extends JpaRepository<TypeGender, UUID> {
+    TypeGender findByName(String name);
 }

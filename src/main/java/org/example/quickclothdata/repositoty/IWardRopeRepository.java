@@ -1,6 +1,6 @@
 package org.example.quickclothdata.repositoty;
 
-import org.example.quickclothdata.model.Sale;
+import org.example.quickclothdata.model.Wardrope;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public interface ISaleRepository extends JpaRepository<Sale, UUID> {
-    @Query("SELECT s FROM Sale s WHERE s.wardrope.uuid = :wardRopeUuid")
-    List<Sale> findAllByWardRopeUuid(UUID wardRopeUuid);
+public interface IWardRopeRepository extends JpaRepository<Wardrope, UUID> {
+    @Query("SELECT w FROM Wardrope w WHERE w.clotheBank.uuid = :clotheBankUuid")
+    List<Wardrope> findAllByClotheBankUuid(UUID clotheBankUuid);
 }

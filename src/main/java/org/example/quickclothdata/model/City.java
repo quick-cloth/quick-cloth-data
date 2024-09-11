@@ -11,7 +11,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "type_meet_us")
+@Table(name = "city")
 public class City {
     @Id
     private UUID uuid;

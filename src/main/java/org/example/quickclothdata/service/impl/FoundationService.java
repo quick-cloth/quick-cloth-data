@@ -2,13 +2,16 @@ package org.example.quickclothdata.service.impl;
 
 import org.example.quickclothdata.model.ContactUser;
 import org.example.quickclothdata.model.Foundation;
+import org.example.quickclothdata.model.FoundationEmployee;
 import org.example.quickclothdata.model.TypeMeetUs;
+import org.example.quickclothdata.payload.request.FoundationRequest;
 import org.example.quickclothdata.repositoty.IContactUserRepository;
 import org.example.quickclothdata.repositoty.IFoundationEmployeeRepository;
 import org.example.quickclothdata.repositoty.IFoundationRespositoy;
 import org.example.quickclothdata.repositoty.ITypeMeetUsRepository;
 import org.example.quickclothdata.service.intf.IFoundationService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
@@ -18,18 +21,18 @@ public class FoundationService implements IFoundationService {
     private final IFoundationRespositoy foundationRepository;
     private final ITypeMeetUsRepository typeMeetUsRepository;
     private final IContactUserRepository contactUserRepository;
-    private final IFoundationEmployeeRepository foundationEmployeeRepository;
 
-    public FoundationService(IFoundationRespositoy foundationRepository, ITypeMeetUsRepository typeMeetUsRepository, IContactUserRepository contactUserRepository, IFoundationEmployeeRepository foundationEmployeeRepository) {
+
+    public FoundationService(IFoundationRespositoy foundationRepository, ITypeMeetUsRepository typeMeetUsRepository, IContactUserRepository contactUserRepository) {
         this.foundationRepository = foundationRepository;
         this.typeMeetUsRepository = typeMeetUsRepository;
         this.contactUserRepository = contactUserRepository;
-        this.foundationEmployeeRepository = foundationEmployeeRepository;
     }
 
-
+    @Transactional
     @Override
     public Foundation saveFoundation(Foundation foundation) {
+        ContactUser contactUser = contactUserRepository.save(foundation.getContactUser());
         return foundationRepository.save(foundation);
     }
 
@@ -39,12 +42,17 @@ public class FoundationService implements IFoundationService {
     }
 
     @Override
-    public ContactUser saveContactUser(ContactUser contactUser) {
-        return contactUserRepository.save(contactUser);
+    public List<TypeMeetUs> getAllTypeMeetUs() {
+        return typeMeetUsRepository.findAll();
     }
 
     @Override
-    public List<TypeMeetUs> getAllTypeMeetUs() {
-        return typeMeetUsRepository.findAll();
+    public TypeMeetUs findTypeMeetUsByName(String name) {
+        return typeMeetUsRepository.findByName(name);
+    }
+
+    @Override
+    public List<Foundation> getAllFoundations() {
+        return foundationRepository.findAll();
     }
 }

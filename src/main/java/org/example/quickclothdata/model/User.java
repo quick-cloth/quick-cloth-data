@@ -13,7 +13,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "user")
+@Table(name = "user_app")
 public class User {
     @Id
     private UUID uuid;
@@ -26,15 +26,17 @@ public class User {
     @Column
     private String email;
     @Column
+    private BigInteger document;
+    @Column
     private BigInteger phone;
     @Column
     private Integer points;
     @Column
     private LocalDate creation_date;
-    @ManyToOne
-    @JoinColumn(name = "role_uuid")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "role_uuid", nullable = false)
     private Role role;
-    @ManyToOne
-    @JoinColumn(name = "type_document_uuid")
-    private TypeDocument typeDocument;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "type_document_uuid", nullable = false)
+    private TypeDocument type_document;
 }
