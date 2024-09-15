@@ -56,6 +56,13 @@ CREATE TABLE foundation_employee (
   PRIMARY KEY (uuid),
   CONSTRAINT unique_employe
     UNIQUE (foundation_uuid, user_uuid));
+CREATE TABLE wardrope_employee (
+  uuid            uuid NOT NULL,
+  wardrope_uuid uuid NOT NULL,
+  user_uuid       uuid NOT NULL,
+  PRIMARY KEY (uuid),
+  CONSTRAINT unique_ward_employe
+    UNIQUE (wardrope_uuid, user_uuid));
 CREATE TABLE inventory (
   uuid          uuid NOT NULL,
   stock         int4 NOT NULL,
@@ -130,7 +137,7 @@ CREATE TABLE user_app (
   last_name          varchar(255) NOT NULL,
   user_name          varchar(255) NOT NULL UNIQUE,
   email              varchar(255) NOT NULL UNIQUE,
-  phone              varchar(255) NOT NULL UNIQUE,
+  phone              bigint NOT NULL UNIQUE,
   points             int4 NOT NULL,
   creation_date      date NOT NULL,
   role_uuid          uuid NOT NULL,
@@ -145,8 +152,8 @@ CREATE TABLE wardrope (
   clothe_bank_uuid uuid NOT NULL,
   city_uuid        uuid NOT NULL,
   PRIMARY KEY (uuid));
-ALTER TABLE "user" ADD CONSTRAINT FKuser777402 FOREIGN KEY (role_uuid) REFERENCES role (uuid);
-ALTER TABLE "user" ADD CONSTRAINT FKuser280514 FOREIGN KEY (type_document_uuid) REFERENCES type_document (uuid);
+ALTER TABLE user_app ADD CONSTRAINT FKuser777402 FOREIGN KEY (role_uuid) REFERENCES role (uuid);
+ALTER TABLE user_app ADD CONSTRAINT FKuser280514 FOREIGN KEY (type_document_uuid) REFERENCES type_document (uuid);
 ALTER TABLE foundation ADD CONSTRAINT FKfoundation264417 FOREIGN KEY (type_meet_us_uuid) REFERENCES type_meet_us (uuid);
 ALTER TABLE foundation ADD CONSTRAINT FKfoundation994527 FOREIGN KEY (contact_user_uuid) REFERENCES contact_user (uuid);
 ALTER TABLE clothe_bank ADD CONSTRAINT FKclothe_ban756133 FOREIGN KEY (foundation_uuid) REFERENCES foundation (uuid);
@@ -167,15 +174,17 @@ ALTER TABLE sale ADD CONSTRAINT FKsale292186 FOREIGN KEY (user_uuid) REFERENCES 
 ALTER TABLE sale_list ADD CONSTRAINT FKsale_list6072 FOREIGN KEY (sale_uuid) REFERENCES sale (uuid);
 ALTER TABLE sale_list ADD CONSTRAINT FKsale_list735000 FOREIGN KEY (clothe_uuid) REFERENCES clothe (uuid);
 ALTER TABLE foundation_employee ADD CONSTRAINT FKfoundation789168 FOREIGN KEY (foundation_uuid) REFERENCES foundation (uuid);
-ALTER TABLE foundation_employee ADD CONSTRAINT FKfoundation852645 FOREIGN KEY (user_uuid) REFERENCES "user" (uuid);
+ALTER TABLE foundation_employee ADD CONSTRAINT FKfoundation852645 FOREIGN KEY (user_uuid) REFERENCES user_app (uuid);
+ALTER TABLE wardrope_employee ADD CONSTRAINT FKwardrope789118 FOREIGN KEY (wardrope_uuid) REFERENCES wardrope (uuid);
+ALTER TABLE wardrope_employee ADD CONSTRAINT FKwardrope802645 FOREIGN KEY (user_uuid) REFERENCES user_app (uuid);
 ALTER TABLE city ADD CONSTRAINT FKcity972336 FOREIGN KEY (department_uuid) REFERENCES department (uuid);
 ALTER TABLE bank_employee ADD CONSTRAINT FKbank_emplo818065 FOREIGN KEY (clothe_bank_uuid) REFERENCES clothe_bank (uuid);
-ALTER TABLE bank_employee ADD CONSTRAINT FKbank_emplo76175 FOREIGN KEY (user_uuid) REFERENCES "user" (uuid);
+ALTER TABLE bank_employee ADD CONSTRAINT FKbank_emplo76175 FOREIGN KEY (user_uuid) REFERENCES user_app (uuid);
 
 -------------------------------------------------------------------------------------------------
 
-ALTER TABLE "user" DROP CONSTRAINT FKuser777402;
-ALTER TABLE "user" DROP CONSTRAINT FKuser280514;
+ALTER TABLE user_app DROP CONSTRAINT FKuser777402;
+ALTER TABLE user_app DROP CONSTRAINT FKuser280514;
 ALTER TABLE foundation DROP CONSTRAINT FKfoundation264417;
 ALTER TABLE foundation DROP CONSTRAINT FKfoundation994527;
 ALTER TABLE clothe_bank DROP CONSTRAINT FKclothe_ban756133;
@@ -220,5 +229,5 @@ DROP TABLE IF EXISTS type_document CASCADE;
 DROP TABLE IF EXISTS type_gender CASCADE;
 DROP TABLE IF EXISTS type_meet_us CASCADE;
 DROP TABLE IF EXISTS typestage CASCADE;
-DROP TABLE IF EXISTS "user" CASCADE;
+DROP TABLE IF EXISTS user_app CASCADE;
 DROP TABLE IF EXISTS wardrope CASCADE;

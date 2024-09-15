@@ -10,4 +10,5 @@ public interface ILocationService {
     List<Department> getAllDepartments();
     Department findDepartmentByUuid(UUID uuid);
     List<City> getAllCitiesByDepartment(UUID departmentUuid);
+    City findCityByUuid(UUID cityUuid);
 }

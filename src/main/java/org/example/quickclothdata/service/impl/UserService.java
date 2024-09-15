@@ -3,9 +3,11 @@ package org.example.quickclothdata.service.impl;
 import org.example.quickclothdata.model.*;
 import org.example.quickclothdata.payload.request.BankEmployeeRequest;
 import org.example.quickclothdata.payload.request.FoundationEmployeeRequest;
+import org.example.quickclothdata.payload.request.WardropeEmployeeRequest;
 import org.example.quickclothdata.repositoty.*;
 import org.example.quickclothdata.service.intf.IUserService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -18,13 +20,15 @@ public class UserService implements IUserService {
     private final ITypeDocumentRepository typeDocumentRepository;
     private final IFoundationEmployeeRepository foundationEmployeeRepository;
     private final IBankEmployeeRepository bankEmployeeRepository;
+    private final IWardRopeEmployeeRepository wardRopeEmployeeRepository;
 
-    public UserService(IUserRepository userRepository, IRoleRepository roleRepository, ITypeDocumentRepository typeDocumentRepository, IFoundationEmployeeRepository foundationEmployeeRepository, IBankEmployeeRepository bankEmployeeRepository) {
+    public UserService(IUserRepository userRepository, IRoleRepository roleRepository, ITypeDocumentRepository typeDocumentRepository, IFoundationEmployeeRepository foundationEmployeeRepository, IBankEmployeeRepository bankEmployeeRepository, IWardRopeEmployeeRepository wardRopeEmployeeRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.typeDocumentRepository = typeDocumentRepository;
         this.foundationEmployeeRepository = foundationEmployeeRepository;
         this.bankEmployeeRepository = bankEmployeeRepository;
+        this.wardRopeEmployeeRepository = wardRopeEmployeeRepository;
     }
 
     @Override
@@ -43,6 +47,21 @@ public class UserService implements IUserService {
     }
 
     @Override
+    public User findUserByUserName(String userName) {
+        return userRepository.findByUserName(userName);
+    }
+
+    @Override
+    public User findUserbyEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public User findUserByPhoneNumber(BigInteger phoneNumber) {
+        return userRepository.findByPhone(phoneNumber);
+    }
+
+    @Override
     public Role saveRole(Role role) {
         return roleRepository.save(role);
     }
@@ -52,24 +71,41 @@ public class UserService implements IUserService {
         return roleRepository.findByName(name);
     }
 
+    @Transactional
     @Override
     public BankEmployee saveUserBankEmployee(BankEmployeeRequest user) {
         User userBankEmployee = userRepository.save(user.getUser());
         BankEmployee bankEmployee = BankEmployee.builder()
+                .uuid(user.getUuid())
                 .clotheBank(user.getClotheBank())
                 .user(userBankEmployee)
                 .build();
         return bankEmployeeRepository.save(bankEmployee);
     }
 
+    @Transactional
     @Override
     public FoundationEmployee saveUserFoundationEmployee(FoundationEmployeeRequest user) {
         User userBankEmployee = userRepository.save(user.getUser());
         FoundationEmployee bankEmployee = FoundationEmployee.builder()
+                .uuid(user.getUuid())
                 .foundation(user.getFoundation())
                 .user(userBankEmployee)
                 .build();
         return foundationEmployeeRepository.save(bankEmployee);
+    }
+
+    @Transactional
+    @Override
+    public WardRopeEmployee saveUserWardropeEmployee(WardropeEmployeeRequest user) {
+        User userWarEmployee = userRepository.save(user.getUser());
+        WardRopeEmployee wardRopeEmployee = WardRopeEmployee.builder()
+                .uuid(user.getUuid())
+                .wardRope(user.getWardrope())
+                .user(userWarEmployee)
+                .build();
+
+        return wardRopeEmployeeRepository.save(wardRopeEmployee);
     }
 
     @Override

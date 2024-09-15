@@ -17,6 +17,8 @@ public class SaleList {
     private UUID uuid;
     @Column
     private Integer value;
+    @Column
+    private Integer quantity;
     @ManyToOne
     @JoinColumn(name = "sale_uuid")
     private Sale sale;

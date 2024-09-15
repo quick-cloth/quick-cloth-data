@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/v1/clothe")
+@RequestMapping("/api/v1/data/clothe")
 public class ClotheController {
 
     private final IClotheService clotheService;

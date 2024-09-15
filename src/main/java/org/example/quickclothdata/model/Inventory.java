@@ -1,11 +1,9 @@
 package org.example.quickclothdata.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+import java.math.BigInteger;
 import java.util.UUID;
 
 @Entity
@@ -13,6 +11,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 @Table(name = "inventory")
 public class Inventory {
     @Id
@@ -21,6 +20,8 @@ public class Inventory {
     private Integer stock;
     @Column
     private Integer minimum_stock;
+    @Column
+    private BigInteger unit_price;
     @ManyToOne
     @JoinColumn(name = "wardrope_uuid")
     private Wardrope wardrope;

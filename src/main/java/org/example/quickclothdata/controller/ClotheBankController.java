@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/v1/clothe_bank")
+@RequestMapping("/api/v1/data/clothe_bank")
 public class ClotheBankController {
     private final IClotheBankService clotheBankService;
     private final ILocationService locationService;
@@ -32,20 +32,5 @@ public class ClotheBankController {
     @GetMapping("/get_all/foundation")
     public ResponseEntity<?> getAllClotheBanks(@RequestParam UUID foundationUuid) {
         return ResponseEntity.ok(clotheBankService.getAllClotheBanksByFoundation(foundationUuid));
-    }
-
-    @GetMapping("/department/get_all")
-    public ResponseEntity<?> getAllDepartments() {
-        return ResponseEntity.ok(locationService.getAllDepartments());
-    }
-
-    @GetMapping("/department/get")
-    public ResponseEntity<?> getDepartment(@RequestParam UUID uuid) {
-        return ResponseEntity.ok(locationService.findDepartmentByUuid(uuid));
-    }
-
-    @GetMapping("/city/get_all/by")
-    public ResponseEntity<?> getAllCities(@RequestParam UUID departmentUuid) {
-        return ResponseEntity.ok(locationService.getAllCitiesByDepartment(departmentUuid));
     }
 }

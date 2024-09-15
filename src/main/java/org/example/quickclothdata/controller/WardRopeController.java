@@ -2,6 +2,7 @@ package org.example.quickclothdata.controller;
 
 import org.example.quickclothdata.model.Inventory;
 import org.example.quickclothdata.model.Wardrope;
+import org.example.quickclothdata.payload.request.OrderRequest;
 import org.example.quickclothdata.payload.request.SaleRequest;
 import org.example.quickclothdata.service.intf.IWardRopeService;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/v1/ward_rope")
+@RequestMapping("/api/v1/data/ward_rope")
 public class WardRopeController {
     private final IWardRopeService wardRopeService;
 
@@ -67,5 +68,10 @@ public class WardRopeController {
     @GetMapping("/sale_list/get_all")
     public ResponseEntity<?> getAllSaleLists(@RequestParam UUID saleUuid) {
         return ResponseEntity.ok(wardRopeService.findSaleListsBySaleUuid(saleUuid));
+    }
+
+    @PostMapping("/order/create")
+    public ResponseEntity<?> createOrder(@RequestBody OrderRequest order) {
+        return ResponseEntity.ok(wardRopeService.saveOrder(order));
     }
 }

@@ -1,9 +1,7 @@
 package org.example.quickclothdata.service.intf;
 
-import org.example.quickclothdata.model.Inventory;
-import org.example.quickclothdata.model.Sale;
-import org.example.quickclothdata.model.SaleList;
-import org.example.quickclothdata.model.Wardrope;
+import org.example.quickclothdata.model.*;
+import org.example.quickclothdata.payload.request.OrderRequest;
 import org.example.quickclothdata.payload.request.SaleRequest;
 
 import java.util.List;
@@ -20,4 +18,5 @@ public interface IWardRopeService {
     Sale saveSale(SaleRequest sale);
     List<Sale> findSalesByWardRopeUuid(UUID wardRopeUuid);
     List<SaleList> findSaleListsBySaleUuid(UUID saleUuid);
+    Order saveOrder(OrderRequest order);
 }

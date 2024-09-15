@@ -34,4 +34,9 @@ public class LocationService implements ILocationService {
     public List<City> getAllCitiesByDepartment(UUID departmentUuid) {
         return cityRepository.findAllByDepartmentUuid(departmentUuid);
     }
+
+    @Override
+    public City findCityByUuid(UUID cityUuid) {
+        return cityRepository.findById(cityUuid).orElse(null);
+    }
 }
