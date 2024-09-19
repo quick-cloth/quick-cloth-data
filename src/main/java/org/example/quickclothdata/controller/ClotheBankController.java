@@ -1,5 +1,6 @@
 package org.example.quickclothdata.controller;
 
+import org.example.quickclothdata.model.Campaign;
 import org.example.quickclothdata.model.ClotheBank;
 import org.example.quickclothdata.service.intf.IClotheBankService;
 import org.example.quickclothdata.service.intf.ILocationService;
@@ -12,11 +13,9 @@ import java.util.UUID;
 @RequestMapping("/api/v1/data/clothe_bank")
 public class ClotheBankController {
     private final IClotheBankService clotheBankService;
-    private final ILocationService locationService;
 
-    public ClotheBankController(IClotheBankService clotheBankService, ILocationService locationService) {
+    public ClotheBankController(IClotheBankService clotheBankService) {
         this.clotheBankService = clotheBankService;
-        this.locationService = locationService;
     }
 
     @PostMapping("/save")
@@ -33,4 +32,20 @@ public class ClotheBankController {
     public ResponseEntity<?> getAllClotheBanks(@RequestParam UUID foundationUuid) {
         return ResponseEntity.ok(clotheBankService.getAllClotheBanksByFoundation(foundationUuid));
     }
+
+    @PostMapping("/campaign/save")
+    public ResponseEntity<?> saveCampaign(@RequestBody Campaign campaign) {
+        return ResponseEntity.ok(clotheBankService.saveCampaign(campaign));
+    }
+
+    @GetMapping("/campaign/get/clothe_bank")
+    public ResponseEntity<?> getCampaign(@RequestParam UUID clotheBankUuid) {
+        return ResponseEntity.ok(clotheBankService.findCampaignByClotheBankUuid(clotheBankUuid));
+    }
+
+    @GetMapping("/type_campaign/get")
+    public ResponseEntity<?> getTypeCampaign(@RequestParam UUID uuid) {
+        return ResponseEntity.ok(clotheBankService.findTypeCampignByUuid(uuid));
+    }
+
 }

@@ -16,6 +16,7 @@ public interface IUserService {
     User findUserByUserName(String userName);
     User findUserbyEmail(String email);
     User findUserByPhoneNumber(BigInteger phoneNumber);
+    List<User> findUsersByRole(String roleName);
     Role saveRole(Role role);
     Role findRoleByName(String name);
     BankEmployee saveUserBankEmployee(BankEmployeeRequest user);

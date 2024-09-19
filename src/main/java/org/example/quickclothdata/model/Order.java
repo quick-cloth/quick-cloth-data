@@ -12,7 +12,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "order")
+@Table(name = "order_clothe")
 public class Order {
     @Id
     private UUID uuid;
