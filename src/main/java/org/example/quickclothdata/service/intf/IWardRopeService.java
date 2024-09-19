@@ -15,8 +15,10 @@ public interface IWardRopeService {
     List<Inventory> findInventoriesByWardRopeUuid(UUID wardRopeUuid);
     List<Inventory> saveInventories(List<Inventory> inventories);
     Inventory updateInventory(Inventory inventory);
+    Inventory findInventoryByUuid(UUID clotheUuid, UUID wardRopeUuid);
     Sale saveSale(SaleRequest sale);
     List<Sale> findSalesByWardRopeUuid(UUID wardRopeUuid);
     List<SaleList> findSaleListsBySaleUuid(UUID saleUuid);
     Order saveOrder(OrderRequest order);
+    OrderState findOrderStateByName(String orderName);
 }

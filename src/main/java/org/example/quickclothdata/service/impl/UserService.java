@@ -62,6 +62,11 @@ public class UserService implements IUserService {
     }
 
     @Override
+    public List<User> findUsersByRole(String roleName) {
+        return userRepository.findByRole(roleName);
+    }
+
+    @Override
     public Role saveRole(Role role) {
         return roleRepository.save(role);
     }

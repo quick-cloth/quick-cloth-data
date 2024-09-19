@@ -55,6 +55,11 @@ public class UserController {
         return ResponseEntity.ok(userService.findRoleByName(name));
     }
 
+    @GetMapping("/get_all/role")
+    public ResponseEntity<?> getAllRole(@RequestParam String roleName) {
+        return ResponseEntity.ok(userService.findUsersByRole(roleName));
+    }
+
     @PostMapping("/bank_employee/save")
     public ResponseEntity<?> saveUserBankEmployee(@RequestBody BankEmployeeRequest user) {
         return ResponseEntity.ok(userService.saveUserBankEmployee(user));

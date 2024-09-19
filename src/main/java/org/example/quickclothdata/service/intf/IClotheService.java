@@ -18,4 +18,7 @@ public interface IClotheService {
     TypeClothe findTypeClotheByName(String name);
     List<TypeGender> getAllTypeGender();
     TypeGender findTypeGenderByName(String name);
+    TypeGender findTypeGenderByUuid(UUID uuid);
+    TypeClothe findTypeClotheByUuid(UUID uuid);
+    TypeStage findTypeStageByUuid(UUID uuid);
 }

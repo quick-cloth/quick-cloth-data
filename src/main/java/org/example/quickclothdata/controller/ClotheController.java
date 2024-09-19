@@ -37,13 +37,28 @@ public class ClotheController {
         return ResponseEntity.ok(clotheService.getAllTypeGender());
     }
 
+    @GetMapping("/type_gender/get")
+    public ResponseEntity<?> getTypeGender(@RequestParam UUID uuid) {
+        return ResponseEntity.ok(clotheService.findTypeGenderByUuid(uuid));
+    }
+
     @GetMapping("/type_clothe/get_all")
     public ResponseEntity<?> getAllTypeClothe() {
         return ResponseEntity.ok(clotheService.getAllTypeClothe());
     }
 
+    @GetMapping("/type_clothe/get")
+    public ResponseEntity<?> getTypeClothe(@RequestParam UUID uuid) {
+        return ResponseEntity.ok(clotheService.findTypeClotheByUuid(uuid));
+    }
+
     @GetMapping("/type_stage/get_all")
     public ResponseEntity<?> getAllTypeStage() {
         return ResponseEntity.ok(clotheService.getAllTypeStage());
+    }
+
+    @GetMapping("/type_stage/get")
+    public ResponseEntity<?> getTypeStage(@RequestParam UUID uuid) {
+        return ResponseEntity.ok(clotheService.findTypeStageByUuid(uuid));
     }
 }

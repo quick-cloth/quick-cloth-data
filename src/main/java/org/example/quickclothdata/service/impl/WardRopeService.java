@@ -20,14 +20,16 @@ public class WardRopeService implements IWardRopeService {
     private final ISaleListRepository saleListRepository;
     private final IOrderRepository orderRepository;
     private final IOrderListRepository orderListRepository;
+    private final IUserRepository userRepository;
 
-    public WardRopeService(IWardRopeRepository wardRopeRepository1, IInventoryRepository inventoryRepository, ISaleRepository saleRepository, ISaleListRepository saleListRepository, IOrderRepository orderRepository, IOrderListRepository orderListRepository) {
+    public WardRopeService(IWardRopeRepository wardRopeRepository1, IInventoryRepository inventoryRepository, ISaleRepository saleRepository, ISaleListRepository saleListRepository, IOrderRepository orderRepository, IOrderListRepository orderListRepository, IUserRepository userRepository) {
         this.wardRopeRepository = wardRopeRepository1;
         this.inventoryRepository = inventoryRepository;
         this.saleRepository = saleRepository;
         this.saleListRepository = saleListRepository;
         this.orderRepository = orderRepository;
         this.orderListRepository = orderListRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -65,12 +67,18 @@ public class WardRopeService implements IWardRopeService {
         return inventoryRepository.save(inventory);
     }
 
+    @Override
+    public Inventory findInventoryByUuid(UUID clotheUuid, UUID wardRopeUuid) {
+        return inventoryRepository.findByClotheAndWardrope(clotheUuid, wardRopeUuid);
+    }
+
     @Transactional
     @Override
     public Sale saveSale(SaleRequest sale) {
         List<Inventory> newInventory = new ArrayList<>();
 
         Sale newSale = saleRepository.save(sale.getSale());
+        newSale.setUser(userRepository.save(sale.getSale().getUser()));
         sale.getSaleListRequests().forEach(saleList -> saleList.setSale(newSale));
         saleListRepository.saveAll(sale.getSaleListRequests());
 
@@ -103,5 +111,10 @@ public class WardRopeService implements IWardRopeService {
 
         orderListRepository.saveAll(order.getOrderList());
         return newOrder;
+    }
+
+    @Override
+    public OrderState findOrderStateByName(String orderName) {
+        return orderRepository.findOrderStateByName(orderName);
     }
 }

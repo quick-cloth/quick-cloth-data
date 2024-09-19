@@ -72,4 +72,19 @@ public class ClotheService implements IClotheService {
     public TypeGender findTypeGenderByName(String name) {
         return typeGenderRepository.findByName(name);
     }
+
+    @Override
+    public TypeGender findTypeGenderByUuid(UUID uuid) {
+        return typeGenderRepository.findById(uuid).orElse(null);
+    }
+
+    @Override
+    public TypeClothe findTypeClotheByUuid(UUID uuid) {
+        return typeClotheRepository.findById(uuid).orElse(null);
+    }
+
+    @Override
+    public TypeStage findTypeStageByUuid(UUID uuid) {
+        return typeStageRepository.findById(uuid).orElse(null);
+    }
 }

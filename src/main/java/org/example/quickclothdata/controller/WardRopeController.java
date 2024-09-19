@@ -1,5 +1,6 @@
 package org.example.quickclothdata.controller;
 
+import org.example.quickclothdata.model.Campaign;
 import org.example.quickclothdata.model.Inventory;
 import org.example.quickclothdata.model.Wardrope;
 import org.example.quickclothdata.payload.request.OrderRequest;
@@ -45,6 +46,11 @@ public class WardRopeController {
         return ResponseEntity.ok(wardRopeService.findInventoriesByWardRopeUuid(wardRopeUuid));
     }
 
+    @GetMapping("/inventory/get/by")
+    public ResponseEntity<?> getInventory(@RequestParam UUID clotheUuid, @RequestParam UUID wardRopeUuid) {
+        return ResponseEntity.ok(wardRopeService.findInventoryByUuid(clotheUuid, wardRopeUuid));
+    }
+
     @PostMapping("/inventory/save_all")
     public ResponseEntity<?> saveAllInventories(@RequestBody List<Inventory> inventories) {
         return ResponseEntity.ok(wardRopeService.saveInventories(inventories));
@@ -73,5 +79,10 @@ public class WardRopeController {
     @PostMapping("/order/create")
     public ResponseEntity<?> createOrder(@RequestBody OrderRequest order) {
         return ResponseEntity.ok(wardRopeService.saveOrder(order));
+    }
+
+    @GetMapping("/order_state/get/name")
+    public ResponseEntity<?> getOrderStateByName(@RequestParam String orderName) {
+        return ResponseEntity.ok(wardRopeService.findOrderStateByName(orderName));
     }
 }
