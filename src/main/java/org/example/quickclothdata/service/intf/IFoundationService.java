@@ -11,5 +11,6 @@ public interface IFoundationService {
     Foundation findFoundationByUuid(UUID uuid);
     List<TypeMeetUs> getAllTypeMeetUs();
     TypeMeetUs findTypeMeetUsByName(String name);
-    List<Foundation> getAllFoundations();
+    List<Foundation> getAllFoundationsByClotheBank(UUID clotheBankUuid);
+    TypeMeetUs findTypeMeetUsByUuid(UUID uuid);
 }

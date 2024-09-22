@@ -21,8 +21,8 @@ public class Sale {
     @Column
     private LocalDate sale_date;
     @ManyToOne
-    @JoinColumn(name = "wardrope_uuid")
-    private Wardrope wardrope;
+    @JoinColumn(name = "wardrobe_uuid")
+    private Wardrobe wardrobe;
     @ManyToOne
     @JoinColumn(name = "user_uuid")
     private User user;

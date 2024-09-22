@@ -3,7 +3,7 @@ package org.example.quickclothdata.controller;
 import org.example.quickclothdata.model.User;
 import org.example.quickclothdata.payload.request.BankEmployeeRequest;
 import org.example.quickclothdata.payload.request.FoundationEmployeeRequest;
-import org.example.quickclothdata.payload.request.WardropeEmployeeRequest;
+import org.example.quickclothdata.payload.request.WardrobeEmployeeRequest;
 import org.example.quickclothdata.service.intf.IUserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -66,7 +66,7 @@ public class UserController {
     }
 
     @PostMapping("/wardrope_employee/save")
-    public ResponseEntity<?> saveUserWardropeEmployee(@RequestBody WardropeEmployeeRequest user) {
+    public ResponseEntity<?> saveUserWardropeEmployee(@RequestBody WardrobeEmployeeRequest user) {
         return ResponseEntity.ok(userService.saveUserWardropeEmployee(user));
     }
 

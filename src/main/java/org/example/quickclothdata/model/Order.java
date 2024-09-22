@@ -24,6 +24,6 @@ public class Order {
     @JoinColumn(name = "order_state_uuid")
     private OrderState orderState;
     @ManyToOne
-    @JoinColumn(name = "wardrope_uuid")
-    private Wardrope wardrope;
+    @JoinColumn(name = "wardrobe_uuid")
+    private Wardrobe wardrobe;
 }

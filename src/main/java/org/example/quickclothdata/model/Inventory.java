@@ -23,8 +23,8 @@ public class Inventory {
     @Column
     private BigInteger unit_price;
     @ManyToOne
-    @JoinColumn(name = "wardrope_uuid")
-    private Wardrope wardrope;
+    @JoinColumn(name = "wardrobe_uuid")
+    private Wardrobe wardrobe;
     @ManyToOne
     @JoinColumn(name = "clothe_uuid")
     private Clothe clothe;

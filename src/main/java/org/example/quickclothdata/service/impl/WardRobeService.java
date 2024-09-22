@@ -4,7 +4,7 @@ import org.example.quickclothdata.model.*;
 import org.example.quickclothdata.payload.request.OrderRequest;
 import org.example.quickclothdata.payload.request.SaleRequest;
 import org.example.quickclothdata.repositoty.*;
-import org.example.quickclothdata.service.intf.IWardRopeService;
+import org.example.quickclothdata.service.intf.IWardRobeService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,42 +13,44 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class WardRopeService implements IWardRopeService {
-    private final IWardRopeRepository wardRopeRepository;
+public class WardRobeService implements IWardRobeService {
+    private final IWardRobeRepository wardRopeRepository;
     private final IInventoryRepository inventoryRepository;
     private final ISaleRepository saleRepository;
     private final ISaleListRepository saleListRepository;
     private final IOrderRepository orderRepository;
     private final IOrderListRepository orderListRepository;
+    private final IOrderStateRepository orderStateRepository;
     private final IUserRepository userRepository;
 
-    public WardRopeService(IWardRopeRepository wardRopeRepository1, IInventoryRepository inventoryRepository, ISaleRepository saleRepository, ISaleListRepository saleListRepository, IOrderRepository orderRepository, IOrderListRepository orderListRepository, IUserRepository userRepository) {
+    public WardRobeService(IWardRobeRepository wardRopeRepository1, IInventoryRepository inventoryRepository, ISaleRepository saleRepository, ISaleListRepository saleListRepository, IOrderRepository orderRepository, IOrderListRepository orderListRepository, IOrderStateRepository orderStateRepository, IUserRepository userRepository) {
         this.wardRopeRepository = wardRopeRepository1;
         this.inventoryRepository = inventoryRepository;
         this.saleRepository = saleRepository;
         this.saleListRepository = saleListRepository;
         this.orderRepository = orderRepository;
         this.orderListRepository = orderListRepository;
+        this.orderStateRepository = orderStateRepository;
         this.userRepository = userRepository;
     }
 
     @Override
-    public Wardrope saveWardRope(Wardrope wardrope) {
+    public Wardrobe saveWardRope(Wardrobe wardrope) {
         return wardRopeRepository.save(wardrope);
     }
 
     @Override
-    public Wardrope updateWardRope(Wardrope wardrope) {
+    public Wardrobe updateWardRope(Wardrobe wardrope) {
         return wardRopeRepository.save(wardrope);
     }
 
     @Override
-    public Wardrope findWardRopeByUuid(UUID uuid) {
+    public Wardrobe findWardRopeByUuid(UUID uuid) {
         return wardRopeRepository.findById(uuid).orElse(null);
     }
 
     @Override
-    public List<Wardrope> finAllWardRopeByClotheBankUuid(UUID clotheBankUuid) {
+    public List<Wardrobe> finAllWardRopeByClotheBankUuid(UUID clotheBankUuid) {
         return wardRopeRepository.findAllByClotheBankUuid(clotheBankUuid);
     }
 
@@ -83,7 +85,7 @@ public class WardRopeService implements IWardRopeService {
         saleListRepository.saveAll(sale.getSaleListRequests());
 
         for (SaleList saleList : sale.getSaleListRequests()) {
-            Inventory i = inventoryRepository.findByClotheAndWardrope(saleList.getClothe().getUuid(), sale.getSale().getWardrope().getUuid());
+            Inventory i = inventoryRepository.findByClotheAndWardrope(saleList.getClothe().getUuid(), sale.getSale().getWardrobe().getUuid());
             i.setStock(i.getStock() - saleList.getQuantity());
             newInventory.add(i);
         }
@@ -115,6 +117,6 @@ public class WardRopeService implements IWardRopeService {
 
     @Override
     public OrderState findOrderStateByName(String orderName) {
-        return orderRepository.findOrderStateByName(orderName);
+        return orderStateRepository.findOrderStateByName(orderName);
     }
 }

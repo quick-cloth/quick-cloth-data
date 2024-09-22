@@ -3,7 +3,7 @@ package org.example.quickclothdata.service.intf;
 import org.example.quickclothdata.model.*;
 import org.example.quickclothdata.payload.request.BankEmployeeRequest;
 import org.example.quickclothdata.payload.request.FoundationEmployeeRequest;
-import org.example.quickclothdata.payload.request.WardropeEmployeeRequest;
+import org.example.quickclothdata.payload.request.WardrobeEmployeeRequest;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -21,7 +21,7 @@ public interface IUserService {
     Role findRoleByName(String name);
     BankEmployee saveUserBankEmployee(BankEmployeeRequest user);
     FoundationEmployee saveUserFoundationEmployee(FoundationEmployeeRequest user);
-    WardRopeEmployee saveUserWardropeEmployee(WardropeEmployeeRequest user);
+    WardRobeEmployee saveUserWardropeEmployee(WardrobeEmployeeRequest user);
     TypeDocument saveTypeDocument(TypeDocument typeDocument);
     List<TypeDocument> getAllTypeDocument();
     TypeDocument findTypeDocumentByUUID(UUID uuid);

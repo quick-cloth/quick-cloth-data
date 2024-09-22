@@ -37,11 +37,6 @@ public class ClotheBankService implements IClotheBankService {
     }
 
     @Override
-    public List<ClotheBank> getAllClotheBanksByFoundation(UUID foundationUuid) {
-        return clotheBankRepository.findAllByFoundationUuid(foundationUuid);
-    }
-
-    @Override
     public Campaign saveCampaign(Campaign campaign) {
         return campaignRepository.save(campaign);
     }

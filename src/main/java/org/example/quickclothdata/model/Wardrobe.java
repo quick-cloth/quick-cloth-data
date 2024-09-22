@@ -3,7 +3,6 @@ package org.example.quickclothdata.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -13,8 +12,8 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "wardrope")
-public class Wardrope {
+@Table(name = "wardrobe")
+public class Wardrobe {
     @Id
     private UUID uuid;
     @Column

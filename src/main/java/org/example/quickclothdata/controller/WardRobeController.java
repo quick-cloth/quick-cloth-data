@@ -1,11 +1,10 @@
 package org.example.quickclothdata.controller;
 
-import org.example.quickclothdata.model.Campaign;
 import org.example.quickclothdata.model.Inventory;
-import org.example.quickclothdata.model.Wardrope;
+import org.example.quickclothdata.model.Wardrobe;
 import org.example.quickclothdata.payload.request.OrderRequest;
 import org.example.quickclothdata.payload.request.SaleRequest;
-import org.example.quickclothdata.service.intf.IWardRopeService;
+import org.example.quickclothdata.service.intf.IWardRobeService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,21 +13,21 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/data/ward_rope")
-public class WardRopeController {
-    private final IWardRopeService wardRopeService;
+public class WardRobeController {
+    private final IWardRobeService wardRopeService;
 
-    public WardRopeController(IWardRopeService wardRopeService) {
+    public WardRobeController(IWardRobeService wardRopeService) {
         this.wardRopeService = wardRopeService;
     }
 
     @PostMapping("/save")
-    public ResponseEntity<?> saveWardRope(@RequestBody Wardrope wardrope) {
-        return ResponseEntity.ok(wardRopeService.saveWardRope(wardrope));
+    public ResponseEntity<?> saveWardRope(@RequestBody Wardrobe wardrobe) {
+        return ResponseEntity.ok(wardRopeService.saveWardRope(wardrobe));
     }
 
     @PostMapping("/update")
-    public ResponseEntity<?> updateWardRope(@RequestBody Wardrope wardrope) {
-        return ResponseEntity.ok(wardRopeService.updateWardRope(wardrope));
+    public ResponseEntity<?> updateWardRope(@RequestBody Wardrobe wardrobe) {
+        return ResponseEntity.ok(wardRopeService.updateWardRope(wardrobe));
     }
 
     @GetMapping("/get")

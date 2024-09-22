@@ -11,13 +11,13 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "wardrope_employee")
-public class WardRopeEmployee {
+@Table(name = "wardrobe_employee")
+public class WardRobeEmployee {
     @Id
     private UUID uuid;
     @ManyToOne
-    @JoinColumn(name = "wardrope_uuid")
-    private Wardrope wardRope;
+    @JoinColumn(name = "wardrobe_uuid")
+    private Wardrobe wardrobe;
     @ManyToOne
     @JoinColumn(name = "user_uuid")
     private User user;

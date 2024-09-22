@@ -10,7 +10,4 @@ import java.util.UUID;
 
 @Repository
 public interface IOrderRepository extends JpaRepository<Order, UUID> {
-
-    @Query("SELECT os FROM OrderState os WHERE os.name = :orderName")
-    OrderState findOrderStateByName(String orderName);
 }

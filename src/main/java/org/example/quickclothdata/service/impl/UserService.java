@@ -3,7 +3,7 @@ package org.example.quickclothdata.service.impl;
 import org.example.quickclothdata.model.*;
 import org.example.quickclothdata.payload.request.BankEmployeeRequest;
 import org.example.quickclothdata.payload.request.FoundationEmployeeRequest;
-import org.example.quickclothdata.payload.request.WardropeEmployeeRequest;
+import org.example.quickclothdata.payload.request.WardrobeEmployeeRequest;
 import org.example.quickclothdata.repositoty.*;
 import org.example.quickclothdata.service.intf.IUserService;
 import org.springframework.stereotype.Service;
@@ -20,9 +20,9 @@ public class UserService implements IUserService {
     private final ITypeDocumentRepository typeDocumentRepository;
     private final IFoundationEmployeeRepository foundationEmployeeRepository;
     private final IBankEmployeeRepository bankEmployeeRepository;
-    private final IWardRopeEmployeeRepository wardRopeEmployeeRepository;
+    private final IWardRobeEmployeeRepository wardRopeEmployeeRepository;
 
-    public UserService(IUserRepository userRepository, IRoleRepository roleRepository, ITypeDocumentRepository typeDocumentRepository, IFoundationEmployeeRepository foundationEmployeeRepository, IBankEmployeeRepository bankEmployeeRepository, IWardRopeEmployeeRepository wardRopeEmployeeRepository) {
+    public UserService(IUserRepository userRepository, IRoleRepository roleRepository, ITypeDocumentRepository typeDocumentRepository, IFoundationEmployeeRepository foundationEmployeeRepository, IBankEmployeeRepository bankEmployeeRepository, IWardRobeEmployeeRepository wardRopeEmployeeRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.typeDocumentRepository = typeDocumentRepository;
@@ -102,11 +102,11 @@ public class UserService implements IUserService {
 
     @Transactional
     @Override
-    public WardRopeEmployee saveUserWardropeEmployee(WardropeEmployeeRequest user) {
+    public WardRobeEmployee saveUserWardropeEmployee(WardrobeEmployeeRequest user) {
         User userWarEmployee = userRepository.save(user.getUser());
-        WardRopeEmployee wardRopeEmployee = WardRopeEmployee.builder()
+        WardRobeEmployee wardRopeEmployee = WardRobeEmployee.builder()
                 .uuid(user.getUuid())
-                .wardRope(user.getWardrope())
+                .wardrobe(user.getWardrope())
                 .user(userWarEmployee)
                 .build();
 

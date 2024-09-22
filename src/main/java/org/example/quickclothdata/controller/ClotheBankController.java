@@ -28,11 +28,6 @@ public class ClotheBankController {
         return ResponseEntity.ok(clotheBankService.findClotheBankByUuid(uuid));
     }
 
-    @GetMapping("/get_all/foundation")
-    public ResponseEntity<?> getAllClotheBanks(@RequestParam UUID foundationUuid) {
-        return ResponseEntity.ok(clotheBankService.getAllClotheBanksByFoundation(foundationUuid));
-    }
-
     @PostMapping("/campaign/save")
     public ResponseEntity<?> saveCampaign(@RequestBody Campaign campaign) {
         return ResponseEntity.ok(clotheBankService.saveCampaign(campaign));

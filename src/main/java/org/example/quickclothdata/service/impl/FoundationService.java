@@ -32,7 +32,7 @@ public class FoundationService implements IFoundationService {
     @Transactional
     @Override
     public Foundation saveFoundation(Foundation foundation) {
-        ContactUser contactUser = contactUserRepository.save(foundation.getContactUser());
+        contactUserRepository.save(foundation.getContactUser());
         return foundationRepository.save(foundation);
     }
 
@@ -52,7 +52,12 @@ public class FoundationService implements IFoundationService {
     }
 
     @Override
-    public List<Foundation> getAllFoundations() {
-        return foundationRepository.findAll();
+    public List<Foundation> getAllFoundationsByClotheBank(UUID clotheBankUuid) {
+        return foundationRepository.findByClotheBank(clotheBankUuid);
+    }
+
+    @Override
+    public TypeMeetUs findTypeMeetUsByUuid(UUID uuid) {
+        return typeMeetUsRepository.findById(uuid).orElse(null);
     }
 }

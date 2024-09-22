@@ -22,9 +22,9 @@ public class FoundationController {
         return ResponseEntity.ok(foundationService.saveFoundation(foundation));
     }
 
-    @GetMapping("/get_all")
-    public ResponseEntity<?> getAllFoundations() {
-        return ResponseEntity.ok(foundationService.getAllFoundations());
+    @GetMapping("/get_all/clothe_bank")
+    public ResponseEntity<?> getAllFoundations(@RequestParam UUID clotheBankUuid) {
+        return ResponseEntity.ok(foundationService.getAllFoundationsByClotheBank(clotheBankUuid));
     }
 
     @GetMapping("/get")
@@ -35,5 +35,10 @@ public class FoundationController {
     @GetMapping("/type_meet_us/get_all")
     public ResponseEntity<?> getAllTypeMeetUs() {
         return ResponseEntity.ok(foundationService.getAllTypeMeetUs());
+    }
+
+    @GetMapping("/type_meet_us/get")
+    public ResponseEntity<?> getTypeMeetUsByName(@RequestParam UUID uuid) {
+        return ResponseEntity.ok(foundationService.findTypeMeetUsByUuid(uuid));
     }
 }

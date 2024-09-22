@@ -35,4 +35,10 @@ public class Foundation {
     @ManyToOne
     @JoinColumn(name = "contact_user_uuid")
     private ContactUser contactUser;
+    @ManyToOne
+    @JoinColumn(name = "clothe_bank_uuid")
+    private ClotheBank clotheBank;
+    @ManyToOne
+    @JoinColumn(name = "city_uuid")
+    private City city;
 }

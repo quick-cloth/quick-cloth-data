@@ -10,6 +10,4 @@ import java.util.UUID;
 
 @Repository
 public interface IClotheBankRepository extends JpaRepository<ClotheBank, UUID> {
-    @Query("SELECT cb FROM ClotheBank cb WHERE cb.foundation.uuid = :foundationUuid")
-    List<ClotheBank> findAllByFoundationUuid(UUID foundationUuid);
 }

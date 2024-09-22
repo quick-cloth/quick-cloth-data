@@ -7,11 +7,11 @@ import org.example.quickclothdata.payload.request.SaleRequest;
 import java.util.List;
 import java.util.UUID;
 
-public interface IWardRopeService {
-    Wardrope saveWardRope(Wardrope wardrope);
-    Wardrope updateWardRope(Wardrope wardrope);
-    Wardrope findWardRopeByUuid(UUID uuid);
-    List<Wardrope> finAllWardRopeByClotheBankUuid(UUID clotheBankUuid);
+public interface IWardRobeService {
+    Wardrobe saveWardRope(Wardrobe wardrope);
+    Wardrobe updateWardRope(Wardrobe wardrope);
+    Wardrobe findWardRopeByUuid(UUID uuid);
+    List<Wardrobe> finAllWardRopeByClotheBankUuid(UUID clotheBankUuid);
     List<Inventory> findInventoriesByWardRopeUuid(UUID wardRopeUuid);
     List<Inventory> saveInventories(List<Inventory> inventories);
     Inventory updateInventory(Inventory inventory);

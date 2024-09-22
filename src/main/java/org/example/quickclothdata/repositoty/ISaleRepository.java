@@ -10,6 +10,6 @@ import java.util.UUID;
 
 @Repository
 public interface ISaleRepository extends JpaRepository<Sale, UUID> {
-    @Query("SELECT s FROM Sale s WHERE s.wardrope.uuid = :wardRopeUuid")
+    @Query("SELECT s FROM Sale s WHERE s.wardrobe.uuid = :wardRopeUuid")
     List<Sale> findAllByWardRopeUuid(UUID wardRopeUuid);
 }

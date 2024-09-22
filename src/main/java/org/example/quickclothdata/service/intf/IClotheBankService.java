@@ -8,7 +8,6 @@ import java.util.UUID;
 public interface IClotheBankService {
     ClotheBank saveClotheBank(ClotheBank clotheBank);
     ClotheBank findClotheBankByUuid(UUID uuid);
-    List<ClotheBank> getAllClotheBanksByFoundation(UUID foundationUuid);
     Campaign saveCampaign(Campaign campaign);
     TypeCampaign findTypeCampignByUuid(UUID clotheBankUuid);
     List<Campaign> findCampaignByClotheBankUuid(UUID clotheBankUuid);

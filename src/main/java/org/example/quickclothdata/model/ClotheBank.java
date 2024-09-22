@@ -20,9 +20,6 @@ public class ClotheBank {
     @Column
     private String address;
     @ManyToOne
-    @JoinColumn(name = "foundation_uuid")
-    private Foundation foundation;
-    @ManyToOne
     @JoinColumn(name = "city_uuid")
     private City city;
 }

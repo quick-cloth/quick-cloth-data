@@ -10,10 +10,10 @@ import java.util.UUID;
 
 @Repository
 public interface IInventoryRepository extends JpaRepository<Inventory, UUID> {
-    @Query("SELECT i FROM Inventory i WHERE i.wardrope.uuid = :wardRopeUuid")
+    @Query("SELECT i FROM Inventory i WHERE i.wardrobe.uuid = :wardRopeUuid")
     List<Inventory> findAllByWardRopeUuid(UUID wardRopeUuid);
 
     @Query("SELECT i FROM Inventory i " +
-            "WHERE i.clothe.uuid = :clotheUuid AND i.wardrope.uuid = :wardropeUuid")
+            "WHERE i.clothe.uuid = :clotheUuid AND i.wardrobe.uuid = :wardropeUuid")
     Inventory findByClotheAndWardrope(UUID clotheUuid, UUID wardropeUuid);
 }
