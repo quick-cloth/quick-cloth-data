@@ -25,4 +25,6 @@ public interface IUserService {
     TypeDocument saveTypeDocument(TypeDocument typeDocument);
     List<TypeDocument> getAllTypeDocument();
     TypeDocument findTypeDocumentByUUID(UUID uuid);
+    WardRobeEmployee findWarRobeEmployeeByUsername(String username);
+    BankEmployee findBankEmployeeByUsername(String username);
 }

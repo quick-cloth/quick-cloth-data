@@ -21,4 +21,5 @@ public interface IWardRobeService {
     List<SaleList> findSaleListsBySaleUuid(UUID saleUuid);
     Order saveOrder(OrderRequest order);
     OrderState findOrderStateByName(String orderName);
+    List<OrderState> findAllOrderStates();
 }

@@ -84,4 +84,9 @@ public class WardRobeController {
     public ResponseEntity<?> getOrderStateByName(@RequestParam String orderName) {
         return ResponseEntity.ok(wardRopeService.findOrderStateByName(orderName));
     }
+
+    @GetMapping("/order_state/get_all")
+    public ResponseEntity<?> getAllOrderStates() {
+        return ResponseEntity.ok(wardRopeService.findAllOrderStates());
+    }
 }

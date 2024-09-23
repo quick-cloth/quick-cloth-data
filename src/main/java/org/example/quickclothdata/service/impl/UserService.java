@@ -127,4 +127,14 @@ public class UserService implements IUserService {
     public TypeDocument findTypeDocumentByUUID(UUID uuid) {
         return typeDocumentRepository.findById(uuid).orElse(null);
     }
+
+    @Override
+    public WardRobeEmployee findWarRobeEmployeeByUsername(String username) {
+        return wardRopeEmployeeRepository.findByUserUserName(username);
+    }
+
+    @Override
+    public BankEmployee findBankEmployeeByUsername(String username) {
+        return bankEmployeeRepository.findByUserUserName(username);
+    }
 }

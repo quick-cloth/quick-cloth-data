@@ -119,4 +119,9 @@ public class WardRobeService implements IWardRobeService {
     public OrderState findOrderStateByName(String orderName) {
         return orderStateRepository.findOrderStateByName(orderName);
     }
+
+    @Override
+    public List<OrderState> findAllOrderStates() {
+        return orderStateRepository.findAll();
+    }
 }

@@ -65,9 +65,19 @@ public class UserController {
         return ResponseEntity.ok(userService.saveUserBankEmployee(user));
     }
 
+    @GetMapping("bank_employee/get")
+    public ResponseEntity<?> getBankEmployeeByUsername(@RequestParam String username) {
+        return ResponseEntity.ok(userService.findBankEmployeeByUsername(username));
+    }
+
     @PostMapping("/wardrope_employee/save")
     public ResponseEntity<?> saveUserWardropeEmployee(@RequestBody WardrobeEmployeeRequest user) {
         return ResponseEntity.ok(userService.saveUserWardropeEmployee(user));
+    }
+
+    @GetMapping("wardrobe_employee/get")
+    public ResponseEntity<?> getWardrobeEmployeeByUsername(@RequestParam String username) {
+        return ResponseEntity.ok(userService.findWarRobeEmployeeByUsername(username));
     }
 
     @PostMapping("/foundation_employee/save")

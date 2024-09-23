@@ -7,6 +7,7 @@ import org.example.quickclothdata.service.intf.ILocationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @RestController
@@ -33,14 +34,19 @@ public class ClotheBankController {
         return ResponseEntity.ok(clotheBankService.saveCampaign(campaign));
     }
 
-    @GetMapping("/campaign/get/clothe_bank")
-    public ResponseEntity<?> getCampaign(@RequestParam UUID clotheBankUuid) {
-        return ResponseEntity.ok(clotheBankService.findCampaignByClotheBankUuid(clotheBankUuid));
+    @GetMapping("/campaign/get_all/clothe_bank")
+    public ResponseEntity<?> getCampaign(@RequestParam UUID clotheBankUuid, @RequestParam(required = false) LocalDate startDate, @RequestParam(required = false) LocalDate endDate) {
+        return ResponseEntity.ok(clotheBankService.findCampaignByClotheBankUuid(clotheBankUuid, startDate, endDate));
     }
 
     @GetMapping("/type_campaign/get")
     public ResponseEntity<?> getTypeCampaign(@RequestParam UUID uuid) {
         return ResponseEntity.ok(clotheBankService.findTypeCampignByUuid(uuid));
+    }
+
+    @GetMapping("/type_campaign/get_all")
+    public ResponseEntity<?> getAllTypeCampaign() {
+        return ResponseEntity.ok(clotheBankService.findAllTypeCampaign());
     }
 
 }

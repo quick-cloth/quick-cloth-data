@@ -9,6 +9,7 @@ import org.example.quickclothdata.repositoty.ITypeCampaignRepository;
 import org.example.quickclothdata.service.intf.IClotheBankService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -47,7 +48,12 @@ public class ClotheBankService implements IClotheBankService {
     }
 
     @Override
-    public List<Campaign> findCampaignByClotheBankUuid(UUID clotheBankUuid) {
-        return campaignRepository.findAllByClotheBankUuid(clotheBankUuid);
+    public List<Campaign> findCampaignByClotheBankUuid(UUID clotheBankUuid, LocalDate startDate, LocalDate endDate) {
+        return campaignRepository.findAllByClotheBankUuid(clotheBankUuid, startDate, endDate);
+    }
+
+    @Override
+    public List<TypeCampaign> findAllTypeCampaign() {
+        return typeCampaignRepository.findAll();
     }
 }
