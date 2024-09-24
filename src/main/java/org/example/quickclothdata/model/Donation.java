@@ -3,7 +3,7 @@ package org.example.quickclothdata.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.math.BigInteger;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
@@ -12,18 +12,21 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "inventory")
-public class Inventory {
+@Table(name = "donation")
+public class Donation {
     @Id
     private UUID uuid;
     @Column
-    private Integer stock;
-    @Column
-    private Integer minimum_stock;
+    private LocalDate creation_date;
     @ManyToOne
-    @JoinColumn(name = "wardrobe_uuid")
-    private Wardrobe wardrobe;
+    @JoinColumn(name = "clothe_bank_uuid")
+    private ClotheBank clothe_bank;
+    @ManyToOne
+    @JoinColumn(name = "user_uuid")
+    private User user;
     @ManyToOne
     @JoinColumn(name = "clothe_uuid")
     private Clothe clothe;
+    @Column
+    private Integer quantity;
 }

@@ -13,4 +13,6 @@ public interface IClotheBankService {
     TypeCampaign findTypeCampignByUuid(UUID clotheBankUuid);
     List<Campaign> findCampaignByClotheBankUuid(UUID clotheBankUuid, LocalDate startDate, LocalDate endDate);
     List<TypeCampaign> findAllTypeCampaign();
+    Donation saveDonation(Donation donation);
+    List<Donation> saveDonations(List<Donation> donations);
 }
