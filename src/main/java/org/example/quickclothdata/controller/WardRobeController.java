@@ -80,6 +80,11 @@ public class WardRobeController {
         return ResponseEntity.ok(wardRopeService.saveOrder(order));
     }
 
+    @PostMapping("/order/confirm")
+    public ResponseEntity<?> confirmOrder(@RequestBody OrderRequest order, @RequestParam UUID orderUuid) {
+        return ResponseEntity.ok(wardRopeService.confirmOrder(order, orderUuid));
+    }
+
     @GetMapping("/order_state/get/name")
     public ResponseEntity<?> getOrderStateByName(@RequestParam String orderName) {
         return ResponseEntity.ok(wardRopeService.findOrderStateByName(orderName));

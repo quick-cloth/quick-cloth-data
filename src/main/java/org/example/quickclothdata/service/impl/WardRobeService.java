@@ -124,4 +124,26 @@ public class WardRobeService implements IWardRobeService {
     public List<OrderState> findAllOrderStates() {
         return orderStateRepository.findAll();
     }
+
+    @Transactional
+    @Override
+    public Order confirmOrder(OrderRequest order, UUID orderUuid) {
+        List<Inventory> newInventory = new ArrayList<>();
+
+        Order orderConfirm = orderRepository.save(order.getOrder());
+        order.getOrderList().forEach(orderList -> orderList.setOrder(orderConfirm));
+
+        List<OrderList> orderListsConfirm = orderListRepository.saveAll(order.getOrderList());
+
+        for(OrderList orl : orderListsConfirm){
+            Inventory i = inventoryRepository.findByClotheAndWardrope(orl.getClothe().getUuid(), order.getOrder().getWardrobe().getUuid());
+
+            i.setStock(i.getStock() + orl.getDelivery_value());
+            newInventory.add(i);
+        }
+
+        inventoryRepository.saveAll(newInventory);
+
+        return orderConfirm;
+    }
 }
