@@ -2,6 +2,7 @@ package org.example.quickclothdata.controller;
 
 import org.example.quickclothdata.model.Campaign;
 import org.example.quickclothdata.model.ClotheBank;
+import org.example.quickclothdata.model.Donation;
 import org.example.quickclothdata.service.intf.IClotheBankService;
 import org.example.quickclothdata.service.intf.ILocationService;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +30,16 @@ public class ClotheBankController {
         return ResponseEntity.ok(clotheBankService.findClotheBankByUuid(uuid));
     }
 
+    @PostMapping("/donation/save")
+    public ResponseEntity<?> saveDonation(@RequestBody Donation donation) {
+        return ResponseEntity.ok(clotheBankService.saveDonation(donation));
+    }
+
+    @GetMapping("/donation/get_all/clothe_bank")
+    public ResponseEntity<?> getDonationByClotheBank(@RequestParam UUID clotheBankUuid) {
+        return ResponseEntity.ok(clotheBankService.findDonationByClotheBankUuid(clotheBankUuid));
+    }
+
     @PostMapping("/campaign/save")
     public ResponseEntity<?> saveCampaign(@RequestBody Campaign campaign) {
         return ResponseEntity.ok(clotheBankService.saveCampaign(campaign));
@@ -47,6 +58,21 @@ public class ClotheBankController {
     @GetMapping("/type_campaign/get_all")
     public ResponseEntity<?> getAllTypeCampaign() {
         return ResponseEntity.ok(clotheBankService.findAllTypeCampaign());
+    }
+
+    @GetMapping("/order/get_all")
+    public ResponseEntity<?> getOrdersByClotheBank(@RequestParam UUID clotheBankUuid, @RequestParam(required = false) UUID orderStateUuid, @RequestParam(required = false) UUID wardRobeUuid) {
+        return ResponseEntity.ok(clotheBankService.findOrdersByClotheBankUuid(clotheBankUuid, orderStateUuid, wardRobeUuid));
+    }
+
+    @GetMapping("/order_list/get_all")
+    public ResponseEntity<?> getOrderListByOrder(@RequestParam UUID orderUuid) {
+        return ResponseEntity.ok(clotheBankService.findOrderListByOrder(orderUuid));
+    }
+
+    @GetMapping("/order/get")
+    public ResponseEntity<?> getOrder(@RequestParam UUID orderUuid) {
+        return ResponseEntity.ok(clotheBankService.findOrderByUuid(orderUuid));
     }
 
 }

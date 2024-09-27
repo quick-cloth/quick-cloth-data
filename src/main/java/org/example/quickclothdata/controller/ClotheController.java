@@ -27,6 +27,11 @@ public class ClotheController {
         return ResponseEntity.ok(clotheService.findClotheByUuid(uuid));
     }
 
+    @PostMapping("/get_by_all_types")
+    public ResponseEntity<?> getClotheByAllTypes(@RequestBody Clothe clothe){
+        return ResponseEntity.ok(clotheService.findClotheByAllTypes(clothe));
+    }
+
     @GetMapping("/get_all")
     public ResponseEntity<?> getAllClothes() {
         return ResponseEntity.ok(clotheService.findAllClothes());

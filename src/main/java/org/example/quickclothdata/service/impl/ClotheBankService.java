@@ -1,13 +1,7 @@
 package org.example.quickclothdata.service.impl;
 
-import org.example.quickclothdata.model.Campaign;
-import org.example.quickclothdata.model.ClotheBank;
-import org.example.quickclothdata.model.Donation;
-import org.example.quickclothdata.model.TypeCampaign;
-import org.example.quickclothdata.repositoty.ICampaignRepository;
-import org.example.quickclothdata.repositoty.IClotheBankRepository;
-import org.example.quickclothdata.repositoty.IDonationRepository;
-import org.example.quickclothdata.repositoty.ITypeCampaignRepository;
+import org.example.quickclothdata.model.*;
+import org.example.quickclothdata.repositoty.*;
 import org.example.quickclothdata.service.intf.IClotheBankService;
 import org.springframework.stereotype.Service;
 
@@ -21,13 +15,17 @@ public class ClotheBankService implements IClotheBankService {
     private final ICampaignRepository campaignRepository;
     private final ITypeCampaignRepository typeCampaignRepository;
     private final IDonationRepository donationRepository;
+    private final IOrderRepository orderRepository;
+    private final IOrderListRepository orderListRepository;
 
 
-    public ClotheBankService(IClotheBankRepository clotheBankRepository, ICampaignRepository campaignRepository, ITypeCampaignRepository typeCampaignRepository, IDonationRepository donationRepository) {
+    public ClotheBankService(IClotheBankRepository clotheBankRepository, ICampaignRepository campaignRepository, ITypeCampaignRepository typeCampaignRepository, IDonationRepository donationRepository, IOrderRepository orderRepository, IOrderListRepository orderListRepository) {
         this.clotheBankRepository = clotheBankRepository;
         this.campaignRepository = campaignRepository;
         this.typeCampaignRepository = typeCampaignRepository;
         this.donationRepository = donationRepository;
+        this.orderRepository = orderRepository;
+        this.orderListRepository = orderListRepository;
     }
 
 
@@ -69,5 +67,25 @@ public class ClotheBankService implements IClotheBankService {
     @Override
     public List<Donation> saveDonations(List<Donation> donations) {
         return donationRepository.saveAll(donations);
+    }
+
+    @Override
+    public List<Donation> findDonationByClotheBankUuid(UUID clotheBankUuid) {
+        return donationRepository.findAllByClotheBankUuid(clotheBankUuid);
+    }
+
+    @Override
+    public List<Order> findOrdersByClotheBankUuid(UUID clotheBankUuid, UUID orderStateUuid, UUID wardRobeUuid) {
+        return orderRepository.findAllByClotheBankUuid(clotheBankUuid, orderStateUuid, wardRobeUuid);
+    }
+
+    @Override
+    public List<OrderList> findOrderListByOrder(UUID orderUuid) {
+        return orderListRepository.findAllByOrderUuid(orderUuid);
+    }
+
+    @Override
+    public Order findOrderByUuid(UUID orderUuid) {
+        return orderRepository.findById(orderUuid).orElse(null);
     }
 }

@@ -15,4 +15,8 @@ public interface IClotheBankService {
     List<TypeCampaign> findAllTypeCampaign();
     Donation saveDonation(Donation donation);
     List<Donation> saveDonations(List<Donation> donations);
+    List<Donation> findDonationByClotheBankUuid(UUID clotheBankUuid);
+    List<Order> findOrdersByClotheBankUuid(UUID clotheBankUuid, UUID orderStateUuid, UUID wardRobeUuid);
+    List<OrderList> findOrderListByOrder(UUID orderUuid);
+    Order findOrderByUuid(UUID orderUuid);
 }

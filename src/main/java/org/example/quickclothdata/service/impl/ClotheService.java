@@ -87,4 +87,9 @@ public class ClotheService implements IClotheService {
     public TypeStage findTypeStageByUuid(UUID uuid) {
         return typeStageRepository.findById(uuid).orElse(null);
     }
+
+    @Override
+    public Clothe findClotheByAllTypes(Clothe clothe) {
+        return clotheRepository.findByTypeGenderAndTypeClotheAndTypeStage(clothe.getTypeGender(), clothe.getTypeClothe(), clothe.getTypeStage());
+    }
 }

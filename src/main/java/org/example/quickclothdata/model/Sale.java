@@ -26,4 +26,6 @@ public class Sale {
     @ManyToOne
     @JoinColumn(name = "user_uuid")
     private User user;
+    @Column
+    private Integer pay_points;
 }

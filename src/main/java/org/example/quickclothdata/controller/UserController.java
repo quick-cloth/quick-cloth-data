@@ -20,7 +20,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/save/client")
+    @PostMapping("/save")
     public ResponseEntity<?> saveUserClient(@RequestBody User user) {
         return ResponseEntity.ok(userService.saveUserClient(user));
     }
@@ -75,7 +75,7 @@ public class UserController {
         return ResponseEntity.ok(userService.saveUserWardropeEmployee(user));
     }
 
-    @GetMapping("wardrobe_employee/get")
+    @GetMapping("/wardrobe_employee/get")
     public ResponseEntity<?> getWardrobeEmployeeByUsername(@RequestParam String username) {
         return ResponseEntity.ok(userService.findWarRobeEmployeeByUsername(username));
     }
@@ -85,7 +85,7 @@ public class UserController {
         return ResponseEntity.ok(userService.saveUserFoundationEmployee(user));
     }
 
-    @GetMapping("/type_documents/get_all")
+    @GetMapping("/type_document/get_all")
     public ResponseEntity<?> getAllTypeDocuments() {
         return ResponseEntity.ok(userService.getAllTypeDocument());
     }
