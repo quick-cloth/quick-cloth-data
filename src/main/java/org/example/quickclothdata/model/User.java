@@ -39,4 +39,6 @@ public class User {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "type_document_uuid", nullable = false)
     private TypeDocument type_document;
+    @Column
+    private String password;
 }
