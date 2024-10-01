@@ -23,4 +23,5 @@ public interface IWardRobeService {
     OrderState findOrderStateByName(String orderName);
     List<OrderState> findAllOrderStates();
     Order confirmOrder(OrderRequest order, UUID orderUuid);
+    List<Order> findOrdersByWardRobeUuid(UUID wardRopeUuid);
 }

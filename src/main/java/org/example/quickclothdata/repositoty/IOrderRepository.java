@@ -16,4 +16,8 @@ public interface IOrderRepository extends JpaRepository<Order, UUID> {
             "AND (COALESCE(:orderStateUuid, o.orderState.uuid) = o.orderState.uuid) " +
             "AND (COALESCE(:wardRobeUuid, o.wardrobe.uuid) = o.wardrobe.uuid)")
     List<Order> findAllByClotheBankUuid(UUID clotheBankUuid, UUID orderStateUuid, UUID wardRobeUuid);
+
+    @Query("SELECT o FROM Order o " +
+            "WHERE o.wardrobe.uuid = :wardRopeUuid")
+    List<Order> findAllByWardRopeUuid(UUID wardRopeUuid);
 }

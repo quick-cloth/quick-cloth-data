@@ -85,6 +85,11 @@ public class WardRobeController {
         return ResponseEntity.ok(wardRopeService.confirmOrder(order, orderUuid));
     }
 
+    @GetMapping("/order/get_all")
+    public ResponseEntity<?> getAllOrders(@RequestParam UUID wardRobeUuid) {
+        return ResponseEntity.ok(wardRopeService.findOrdersByWardRobeUuid(wardRobeUuid));
+    }
+
     @GetMapping("/order_state/get/name")
     public ResponseEntity<?> getOrderStateByName(@RequestParam String orderName) {
         return ResponseEntity.ok(wardRopeService.findOrderStateByName(orderName));

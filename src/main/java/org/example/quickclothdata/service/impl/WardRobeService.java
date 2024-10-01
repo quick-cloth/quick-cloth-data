@@ -146,4 +146,9 @@ public class WardRobeService implements IWardRobeService {
 
         return orderConfirm;
     }
+
+    @Override
+    public List<Order> findOrdersByWardRobeUuid(UUID wardRopeUuid) {
+        return orderRepository.findAllByWardRopeUuid(wardRopeUuid);
+    }
 }
