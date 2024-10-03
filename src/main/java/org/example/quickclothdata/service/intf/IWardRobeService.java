@@ -24,4 +24,5 @@ public interface IWardRobeService {
     List<OrderState> findAllOrderStates();
     Order confirmOrder(OrderRequest order, UUID orderUuid);
     List<Order> findOrdersByWardRobeUuid(UUID wardRopeUuid);
+    SendEmail saveSendEmail(SendEmail sendEmail);
 }

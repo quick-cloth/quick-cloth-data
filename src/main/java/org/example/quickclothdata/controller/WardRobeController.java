@@ -1,6 +1,7 @@
 package org.example.quickclothdata.controller;
 
 import org.example.quickclothdata.model.Inventory;
+import org.example.quickclothdata.model.SendEmail;
 import org.example.quickclothdata.model.Wardrobe;
 import org.example.quickclothdata.payload.request.OrderRequest;
 import org.example.quickclothdata.payload.request.SaleRequest;
@@ -98,5 +99,10 @@ public class WardRobeController {
     @GetMapping("/order_state/get_all")
     public ResponseEntity<?> getAllOrderStates() {
         return ResponseEntity.ok(wardRopeService.findAllOrderStates());
+    }
+
+    @PostMapping("/send_email/save")
+    public ResponseEntity<?> saveSendEmail(@RequestBody SendEmail sendEmail) {
+        return ResponseEntity.ok(wardRopeService.saveSendEmail(sendEmail));
     }
 }

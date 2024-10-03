@@ -22,8 +22,9 @@ public class WardRobeService implements IWardRobeService {
     private final IOrderListRepository orderListRepository;
     private final IOrderStateRepository orderStateRepository;
     private final IUserRepository userRepository;
+    private final ISendEmailRepository sendEmailRepository;
 
-    public WardRobeService(IWardRobeRepository wardRopeRepository1, IInventoryRepository inventoryRepository, ISaleRepository saleRepository, ISaleListRepository saleListRepository, IOrderRepository orderRepository, IOrderListRepository orderListRepository, IOrderStateRepository orderStateRepository, IUserRepository userRepository) {
+    public WardRobeService(IWardRobeRepository wardRopeRepository1, IInventoryRepository inventoryRepository, ISaleRepository saleRepository, ISaleListRepository saleListRepository, IOrderRepository orderRepository, IOrderListRepository orderListRepository, IOrderStateRepository orderStateRepository, IUserRepository userRepository, ISendEmailRepository sendEmailRepository) {
         this.wardRopeRepository = wardRopeRepository1;
         this.inventoryRepository = inventoryRepository;
         this.saleRepository = saleRepository;
@@ -32,6 +33,7 @@ public class WardRobeService implements IWardRobeService {
         this.orderListRepository = orderListRepository;
         this.orderStateRepository = orderStateRepository;
         this.userRepository = userRepository;
+        this.sendEmailRepository = sendEmailRepository;
     }
 
     @Override
@@ -150,5 +152,10 @@ public class WardRobeService implements IWardRobeService {
     @Override
     public List<Order> findOrdersByWardRobeUuid(UUID wardRopeUuid) {
         return orderRepository.findAllByWardRopeUuid(wardRopeUuid);
+    }
+
+    @Override
+    public SendEmail saveSendEmail(SendEmail sendEmail) {
+        return sendEmailRepository.save(sendEmail);
     }
 }
