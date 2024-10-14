@@ -105,4 +105,9 @@ public class WardRobeController {
     public ResponseEntity<?> saveSendEmail(@RequestBody SendEmail sendEmail) {
         return ResponseEntity.ok(wardRopeService.saveSendEmail(sendEmail));
     }
+
+    @GetMapping("/top_selling_clothes")
+    public ResponseEntity<?> getTopSellingClothes(@RequestParam UUID wardRobeUuid) {
+        return ResponseEntity.ok(wardRopeService.getTopSellingClothes(wardRobeUuid));
+    }
 }

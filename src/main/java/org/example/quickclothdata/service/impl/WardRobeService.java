@@ -3,6 +3,7 @@ package org.example.quickclothdata.service.impl;
 import org.example.quickclothdata.model.*;
 import org.example.quickclothdata.payload.request.OrderRequest;
 import org.example.quickclothdata.payload.request.SaleRequest;
+import org.example.quickclothdata.payload.response.TopSellingClothesProjection;
 import org.example.quickclothdata.repositoty.*;
 import org.example.quickclothdata.service.intf.IWardRobeService;
 import org.springframework.stereotype.Service;
@@ -157,5 +158,10 @@ public class WardRobeService implements IWardRobeService {
     @Override
     public SendEmail saveSendEmail(SendEmail sendEmail) {
         return sendEmailRepository.save(sendEmail);
+    }
+
+    @Override
+    public List<TopSellingClothesProjection> getTopSellingClothes(UUID wardrobeUuid) {
+        return wardRopeRepository.getTopSellingClothes(wardrobeUuid);
     }
 }
