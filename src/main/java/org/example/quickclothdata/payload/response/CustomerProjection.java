@@ -1,5 +1,7 @@
 package org.example.quickclothdata.payload.response;
 
+import org.example.quickclothdata.model.Wardrobe;
+
 import java.util.UUID;
 
 public interface CustomerProjection {
@@ -8,4 +10,5 @@ public interface CustomerProjection {
     String getLastName();
     String getUserName();
     String getPoints();
+    Wardrobe getWardrobe();
 }

@@ -42,12 +42,20 @@ public interface IWardRobeRepository extends JpaRepository<Wardrobe, UUID> {
      * @param clotheUuids the clothes uuids
      * @return the users that have bought clothes from a wardrobe
      */
-    @Query("SELECT DISTINCT u.uuid AS uuid, u.name AS name, u.last_name AS lastName, u.user_name AS userName, u.points AS points " +
-           "FROM SaleList sl " +
-           "JOIN sl.sale s " +
-           "JOIN s.user u " +
-           "WHERE s.wardrobe.uuid = :wardrobeUuid " +
-           "AND sl.clothe.uuid IN :clotheUuids")
+    @Query("""
+        SELECT DISTINCT
+            u.uuid AS uuid,
+            u.name AS name,
+            u.last_name AS lastName,
+            u.user_name AS userName,
+            u.points AS points,
+            s.wardrobe AS wardrobe
+        FROM SaleList sl
+        JOIN sl.sale s
+        JOIN s.user u
+        WHERE s.wardrobe.uuid = :wardrobeUuid
+        AND sl.clothe.uuid IN :clotheUuids
+    """)
     List<CustomerProjection> findCustomersByWardrobeAndClothes(@Param("wardrobeUuid") UUID wardrobeUuid,
                                                                @Param("clotheUuids") List<UUID> clotheUuids);
     
