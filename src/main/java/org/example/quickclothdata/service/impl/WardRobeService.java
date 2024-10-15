@@ -205,10 +205,9 @@ public class WardRobeService implements IWardRobeService {
         List<CreateMinimumStockResponse> response = new ArrayList<>();
         
         for(Inventory i : inventories){
-            response.add(new CreateMinimumStockResponse(i.getStock(), i.getMinimum_stock(), i.getWardrobe().getUuid(), i.getClothe()));
+            response.add(new CreateMinimumStockResponse(i.getUuid() ,i.getStock(), i.getMinimum_stock(), i.getWardrobe().getUuid(), i.getClothe()));
         }
-    
-
+        
         return  response;
     }
 
