@@ -110,4 +110,9 @@ public class WardRobeController {
     public ResponseEntity<?> getTopSellingClothes(@RequestParam UUID wardRobeUuid) {
         return ResponseEntity.ok(wardRopeService.getTopSellingClothes(wardRobeUuid));
     }
+    
+    @GetMapping("/customers/get")
+    public ResponseEntity<?> getCustomer(@RequestParam UUID wardRobeUuid, @RequestParam List<UUID> clotheUuids) {
+        return ResponseEntity.ok(wardRopeService.findCustomersByWardrobeAndClothes(wardRobeUuid, clotheUuids));
+    }
 }

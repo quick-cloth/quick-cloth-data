@@ -3,6 +3,7 @@ package org.example.quickclothdata.service.intf;
 import org.example.quickclothdata.model.*;
 import org.example.quickclothdata.payload.request.OrderRequest;
 import org.example.quickclothdata.payload.request.SaleRequest;
+import org.example.quickclothdata.payload.response.CustomerProjection;
 import org.example.quickclothdata.payload.response.TopSellingClothesProjection;
 
 import java.util.List;
@@ -27,4 +28,5 @@ public interface IWardRobeService {
     List<Order> findOrdersByWardRobeUuid(UUID wardRopeUuid);
     SendEmail saveSendEmail(SendEmail sendEmail);
     List<TopSellingClothesProjection> getTopSellingClothes(UUID wardRopeUuid);
+    List<CustomerProjection> findCustomersByWardrobeAndClothes(UUID wardrobeUuid, List<UUID> clotheUuids);
 }

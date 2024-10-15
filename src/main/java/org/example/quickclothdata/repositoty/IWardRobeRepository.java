@@ -1,9 +1,11 @@
 package org.example.quickclothdata.repositoty;
 
 import org.example.quickclothdata.model.Wardrobe;
+import org.example.quickclothdata.payload.response.CustomerProjection;
 import org.example.quickclothdata.payload.response.TopSellingClothesProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -32,4 +34,19 @@ public interface IWardRobeRepository extends JpaRepository<Wardrobe, UUID> {
     ORDER BY quantity DESC
     """)
     List<TopSellingClothesProjection> getTopSellingClothes(UUID wardrobeUuid);
+
+    /**
+     * Find the users that have bought clothes from a wardrobe
+     * @param wardrobeUuid the wardrobe uuid
+     * @param clotheUuids the clothes uuids
+     * @return the users that have bought clothes from a wardrobe
+     */
+    @Query("SELECT DISTINCT u.uuid AS uuid, u.name AS name, u.last_name AS lastName, u.user_name AS userName, u.points AS points " +
+           "FROM SaleList sl " +
+           "JOIN sl.sale s " +
+           "JOIN s.user u " +
+           "WHERE s.wardrobe.uuid = :wardrobeUuid " +
+           "AND sl.clothe.uuid IN :clotheUuids")
+    List<CustomerProjection> findCustomersByWardrobeAndClothes(@Param("wardrobeUuid") UUID wardrobeUuid,
+                                                               @Param("clotheUuids") List<UUID> clotheUuids);
 }
