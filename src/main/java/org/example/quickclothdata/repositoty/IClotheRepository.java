@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.UUID;
 
 @Repository
@@ -25,4 +26,7 @@ public interface IClotheRepository extends JpaRepository<Clothe, UUID> {
     ClotheByAllTypesProjection findClothesByAllTypes(@Param("typeGenderUuid") UUID typeGenderUuid,
                                                      @Param("typeClotheUuid") UUID typeClotheUuid,
                                                      @Param("typeStageUuid") UUID typeStageUuid);
+
+    @Query("SELECT c FROM Clothe c WHERE c.uuid IN :uuids")
+    List<Clothe> findByUuids(List<UUID> uuids);
 }

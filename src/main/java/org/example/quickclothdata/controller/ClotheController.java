@@ -6,6 +6,7 @@ import org.example.quickclothdata.service.intf.IClotheService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -66,5 +67,11 @@ public class ClotheController {
     @GetMapping("/type_stage/get")
     public ResponseEntity<?> getTypeStage(@RequestParam UUID uuid) {
         return ResponseEntity.ok(clotheService.findTypeStageByUuid(uuid));
+    }
+    
+    
+    @GetMapping("/get")
+    public ResponseEntity<?> getClothe(@RequestParam List<UUID> uuids) {
+        return ResponseEntity.ok(clotheService.findClothesByUuids(uuids));
     }
 }

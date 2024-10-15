@@ -104,4 +104,9 @@ public class ClotheService implements IClotheService {
         
         return clothe1;
     }
+    
+    @Override
+    public List<Clothe> findClothesByUuids(List<UUID> uuids){
+        return clotheRepository.findByUuids(uuids);
+    }
 }
