@@ -70,7 +70,7 @@ public class ClotheController {
     }
     
     
-    @GetMapping("/get")
+    @GetMapping("/get/from_uuids")
     public ResponseEntity<?> getClothe(@RequestParam List<UUID> uuids) {
         return ResponseEntity.ok(clotheService.findClothesByUuids(uuids));
     }
