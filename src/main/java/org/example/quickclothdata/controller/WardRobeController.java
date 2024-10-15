@@ -3,6 +3,7 @@ package org.example.quickclothdata.controller;
 import org.example.quickclothdata.model.Inventory;
 import org.example.quickclothdata.model.SendEmail;
 import org.example.quickclothdata.model.Wardrobe;
+import org.example.quickclothdata.payload.request.CreateMinimumStockRequest;
 import org.example.quickclothdata.payload.request.OrderRequest;
 import org.example.quickclothdata.payload.request.SaleRequest;
 import org.example.quickclothdata.service.intf.IWardRobeService;
@@ -114,5 +115,17 @@ public class WardRobeController {
     @GetMapping("/customers/get")
     public ResponseEntity<?> getCustomer(@RequestParam UUID wardRobeUuid, @RequestParam List<UUID> clotheUuids) {
         return ResponseEntity.ok(wardRopeService.findCustomersByWardrobeAndClothes(wardRobeUuid, clotheUuids));
+    }
+    
+    @GetMapping("/minimum_stock/get")
+    public ResponseEntity<?> getMinimumStocks(@RequestParam UUID wardRobeUuid) {
+        return ResponseEntity.ok(wardRopeService.getMinimumStocks(wardRobeUuid));
+    }
+    
+    @PostMapping("/minimum_stock/save")
+    public ResponseEntity<?> saveMinimumStock(@RequestBody CreateMinimumStockRequest minimumStockRequest) {
+        return ResponseEntity.ok(
+                wardRopeService.saveMinimumStock(minimumStockRequest)
+        );
     }
 }

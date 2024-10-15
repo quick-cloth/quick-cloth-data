@@ -1,9 +1,12 @@
 package org.example.quickclothdata.service.impl;
 
 import org.example.quickclothdata.model.*;
+import org.example.quickclothdata.payload.request.CreateMinimumStockRequest;
 import org.example.quickclothdata.payload.request.OrderRequest;
 import org.example.quickclothdata.payload.request.SaleRequest;
+import org.example.quickclothdata.payload.response.CreateMinimumStockResponse;
 import org.example.quickclothdata.payload.response.CustomerProjection;
+import org.example.quickclothdata.payload.response.MinimumStockProjection;
 import org.example.quickclothdata.payload.response.TopSellingClothesProjection;
 import org.example.quickclothdata.repositoty.*;
 import org.example.quickclothdata.service.intf.IWardRobeService;
@@ -170,6 +173,28 @@ public class WardRobeService implements IWardRobeService {
     public List<CustomerProjection> findCustomersByWardrobeAndClothes(UUID wardrobeUuid, List<UUID> clotheUuids) {
         return wardRopeRepository.findCustomersByWardrobeAndClothes(wardrobeUuid, clotheUuids);
     }
+    
+    @Override
+    public List<MinimumStockProjection> getMinimumStocks(UUID wardrobeUuid) {
+        return wardRopeRepository.findMinimumStocksByWardrobeUuid(wardrobeUuid);
+    }
+    
+    @Override
+    public CreateMinimumStockResponse saveMinimumStock(CreateMinimumStockRequest minimumStockRequest) {
 
+        Inventory inventory = inventoryRepository.findByUuid(minimumStockRequest.getInventoryUuid());
+
+        inventory.setMinimum_stock(minimumStockRequest.getMinimumStock());
+
+        inventoryRepository.save(inventory);
+
+
+        return new CreateMinimumStockResponse(
+                inventory.getStock(),
+                inventory.getMinimum_stock(),
+                inventory.getWardrobe().getUuid(),
+                inventory.getClothe()
+        );
+    }
 
 }

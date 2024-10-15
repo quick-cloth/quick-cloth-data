@@ -2,6 +2,7 @@ package org.example.quickclothdata.repositoty;
 
 import org.example.quickclothdata.model.Wardrobe;
 import org.example.quickclothdata.payload.response.CustomerProjection;
+import org.example.quickclothdata.payload.response.MinimumStockProjection;
 import org.example.quickclothdata.payload.response.TopSellingClothesProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -49,4 +50,18 @@ public interface IWardRobeRepository extends JpaRepository<Wardrobe, UUID> {
            "AND sl.clothe.uuid IN :clotheUuids")
     List<CustomerProjection> findCustomersByWardrobeAndClothes(@Param("wardrobeUuid") UUID wardrobeUuid,
                                                                @Param("clotheUuids") List<UUID> clotheUuids);
+    
+    @Query(value = """
+    SELECT
+    i.stock AS stock,
+    i.minimum_stock AS minimumStock,
+    i.wardrobe.uuid AS wardrobeUuid,
+    i.uuid AS inventoryUuid,
+    c AS clothe
+    FROM Inventory i
+    JOIN Clothe c ON i.clothe.uuid = c.uuid
+    JOIN Wardrobe w ON i.wardrobe.uuid = w.uuid
+    WHERE w.uuid = :wardrobeUuid
+    """)
+    List<MinimumStockProjection> findMinimumStocksByWardrobeUuid(UUID wardrobeUuid);
 }

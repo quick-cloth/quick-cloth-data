@@ -16,4 +16,6 @@ public interface IInventoryRepository extends JpaRepository<Inventory, UUID> {
     @Query("SELECT i FROM Inventory i " +
             "WHERE i.clothe.uuid = :clotheUuid AND i.wardrobe.uuid = :wardropeUuid")
     Inventory findByClotheAndWardrope(UUID clotheUuid, UUID wardropeUuid);
+    
+    Inventory findByUuid(UUID uuid);
 }
