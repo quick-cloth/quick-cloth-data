@@ -1,6 +1,7 @@
 package org.example.quickclothdata.repositoty;
 
 import org.example.quickclothdata.model.User;
+import org.example.quickclothdata.payload.response.SalesByUserProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -18,4 +19,16 @@ public interface IUserRepository extends JpaRepository<User, UUID> {
     User findByPhone(BigInteger phone);
     @Query("SELECT u FROM User u WHERE u.role.name = :roleName")
     List<User> findByRole(String roleName);
+
+    @Query("""
+            SELECT
+                s.uuid AS uuid,
+                s.sale_date AS saleDate,
+                s.value AS value,
+                s.pay_points AS payPoints,
+                w as wardrobe
+            FROM Sale s
+            JOIN s.wardrobe w
+            WHERE s.user.uuid = :userUuid""")
+    List<SalesByUserProjection> findSalesByUser(UUID userUuid); 
 }

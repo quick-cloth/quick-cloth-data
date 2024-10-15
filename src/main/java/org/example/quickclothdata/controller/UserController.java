@@ -94,4 +94,9 @@ public class UserController {
     public ResponseEntity<?> getTypeDocument(@RequestParam UUID uuid) {
         return ResponseEntity.ok(userService.findTypeDocumentByUUID(uuid));
     }
+    
+    @GetMapping("/sales/get")
+    public ResponseEntity<?> getSalesByCustomer(@RequestParam UUID userUuid) {
+        return ResponseEntity.ok(userService.findSalesByUser(userUuid));
+    }
 }

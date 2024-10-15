@@ -4,6 +4,7 @@ import org.example.quickclothdata.model.*;
 import org.example.quickclothdata.payload.request.BankEmployeeRequest;
 import org.example.quickclothdata.payload.request.FoundationEmployeeRequest;
 import org.example.quickclothdata.payload.request.WardrobeEmployeeRequest;
+import org.example.quickclothdata.payload.response.SalesByUserProjection;
 import org.example.quickclothdata.repositoty.*;
 import org.example.quickclothdata.service.intf.IUserService;
 import org.springframework.stereotype.Service;
@@ -136,5 +137,10 @@ public class UserService implements IUserService {
     @Override
     public BankEmployee findBankEmployeeByUsername(String username) {
         return bankEmployeeRepository.findByUserUserName(username);
+    }
+
+    @Override
+    public List<SalesByUserProjection> findSalesByUser(UUID userUuid) {
+        return userRepository.findSalesByUser(userUuid);
     }
 }

@@ -4,6 +4,7 @@ import org.example.quickclothdata.model.*;
 import org.example.quickclothdata.payload.request.BankEmployeeRequest;
 import org.example.quickclothdata.payload.request.FoundationEmployeeRequest;
 import org.example.quickclothdata.payload.request.WardrobeEmployeeRequest;
+import org.example.quickclothdata.payload.response.SalesByUserProjection;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -27,4 +28,5 @@ public interface IUserService {
     TypeDocument findTypeDocumentByUUID(UUID uuid);
     WardRobeEmployee findWarRobeEmployeeByUsername(String username);
     BankEmployee findBankEmployeeByUsername(String username);
+    List<SalesByUserProjection> findSalesByUser(UUID userUuid);
 }
