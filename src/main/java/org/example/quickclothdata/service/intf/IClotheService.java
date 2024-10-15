@@ -23,6 +23,6 @@ public interface IClotheService {
     TypeGender findTypeGenderByUuid(UUID uuid);
     TypeClothe findTypeClotheByUuid(UUID uuid);
     TypeStage findTypeStageByUuid(UUID uuid);
-    ClotheByAllTypesProjection findClotheByAllTypes(ClotheByAllTypesRequest clothe);
+    Clothe findClotheByAllTypes(ClotheByAllTypesRequest clothe);
     List<Clothe> findClothesByUuids(List<UUID> uuids);
 }

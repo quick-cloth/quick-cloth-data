@@ -91,20 +91,20 @@ public class ClotheService implements IClotheService {
     }
 
     @Override
-    public ClotheByAllTypesProjection findClotheByAllTypes(ClotheByAllTypesRequest clothe) {
+    public Clothe findClotheByAllTypes(ClotheByAllTypesRequest clothe) {
 
         ClotheByAllTypesProjection clothe1 = clotheRepository.findClothesByAllTypes(clothe.getTypeGenderUuid(), clothe.getTypeClotheUuid(), clothe.getTypeStageUuid());
         
         
         if (clothe1 == null) {
-        TypeGender typeGender = typeGenderRepository.findById(clothe.getTypeGenderUuid()).orElse(null);
-        TypeClothe typeClothe = typeClotheRepository.findById(clothe.getTypeClotheUuid()).orElse(null);
-        TypeStage typeStage = typeStageRepository.findById(clothe.getTypeStageUuid()).orElse(null);
+            TypeGender typeGender = typeGenderRepository.findById(clothe.getTypeGenderUuid()).orElse(null);
+            TypeClothe typeClothe = typeClotheRepository.findById(clothe.getTypeClotheUuid()).orElse(null);
+            TypeStage typeStage = typeStageRepository.findById(clothe.getTypeStageUuid()).orElse(null);
 
-            return (ClotheByAllTypesProjection) clotheRepository.save(new Clothe(typeClothe, typeGender, typeStage));
+            return clotheRepository.save(new Clothe(typeClothe, typeGender, typeStage));
         }
         
-        return clothe1;
+        return new Clothe(clothe1.getUuid(),clothe1.getTypeClothe(), clothe1.getTypeGender(), clothe1.getTypeStage());
     }
     
     @Override

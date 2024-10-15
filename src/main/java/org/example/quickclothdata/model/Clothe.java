@@ -28,6 +28,7 @@ public class Clothe {
     private TypeStage typeStage;
     
     public Clothe(TypeClothe typeClothe, TypeGender typeGender, TypeStage typeStage) {
+        this.uuid = UUID.randomUUID(); // Generate a new UUID
         this.typeClothe = typeClothe;
         this.typeGender = typeGender;
         this.typeStage = typeStage;
