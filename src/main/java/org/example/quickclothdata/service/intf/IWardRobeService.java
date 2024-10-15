@@ -33,5 +33,5 @@ public interface IWardRobeService {
     List<TopSellingClothesProjection> getTopSellingClothes(UUID wardRopeUuid);
     List<CustomerProjection> findCustomersByWardrobeAndClothes(UUID wardrobeUuid, List<UUID> clotheUuids);
     List<MinimumStockProjection> getMinimumStocks(UUID wardrobeUuid);
-    CreateMinimumStockResponse saveMinimumStock(CreateMinimumStockRequest minimumStockRequest);
+    List<CreateMinimumStockResponse> saveMinimumStock(List<CreateMinimumStockRequest> minimumStocksRequest);
 }

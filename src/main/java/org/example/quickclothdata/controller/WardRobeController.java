@@ -117,13 +117,13 @@ public class WardRobeController {
         return ResponseEntity.ok(wardRopeService.findCustomersByWardrobeAndClothes(wardRobeUuid, clotheUuids));
     }
     
-    @GetMapping("/minimum_stock/get")
+    @GetMapping("/minimum_stocks/get")
     public ResponseEntity<?> getMinimumStocks(@RequestParam UUID wardRobeUuid) {
         return ResponseEntity.ok(wardRopeService.getMinimumStocks(wardRobeUuid));
     }
     
-    @PostMapping("/minimum_stock/save")
-    public ResponseEntity<?> saveMinimumStock(@RequestBody CreateMinimumStockRequest minimumStockRequest) {
+    @PostMapping("/minimum_stocks/save")
+    public ResponseEntity<?> saveMinimumStock(@RequestBody List<CreateMinimumStockRequest> minimumStockRequest) {
         return ResponseEntity.ok(
                 wardRopeService.saveMinimumStock(minimumStockRequest)
         );

@@ -18,4 +18,7 @@ public interface IInventoryRepository extends JpaRepository<Inventory, UUID> {
     Inventory findByClotheAndWardrope(UUID clotheUuid, UUID wardropeUuid);
     
     Inventory findByUuid(UUID uuid);
+    
+    @Query("SELECT i FROM Inventory i WHERE i.uuid IN :uuids")
+    List<Inventory> findAllByUuids(List<UUID> uuids);
 }

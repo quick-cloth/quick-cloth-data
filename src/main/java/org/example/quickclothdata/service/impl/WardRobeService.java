@@ -180,21 +180,36 @@ public class WardRobeService implements IWardRobeService {
     }
     
     @Override
-    public CreateMinimumStockResponse saveMinimumStock(CreateMinimumStockRequest minimumStockRequest) {
+    public List<CreateMinimumStockResponse> saveMinimumStock(List<CreateMinimumStockRequest> minimumStocksRequest) {
+        
+        List<UUID> inventoryUuids = new ArrayList<>();
+        
+        for(CreateMinimumStockRequest request : minimumStocksRequest){
+            inventoryUuids.add(request.getInventoryUuid());
+        }
+        
+        List<Inventory> inventories = inventoryRepository.findAllByUuids(inventoryUuids);
+        
+        for(Inventory i : inventories){
+            i.setMinimum_stock(minimumStocksRequest.stream()
+                    .filter(request -> request.getInventoryUuid().equals(i.getUuid()))
+                    .findFirst()
+                    .get()
+                    .getMinimumStock());
+        }
 
-        Inventory inventory = inventoryRepository.findByUuid(minimumStockRequest.getInventoryUuid());
+        
+        inventoryRepository.saveAll(inventories);
+        
+        
+        List<CreateMinimumStockResponse> response = new ArrayList<>();
+        
+        for(Inventory i : inventories){
+            response.add(new CreateMinimumStockResponse(i.getStock(), i.getMinimum_stock(), i.getWardrobe().getUuid(), i.getClothe()));
+        }
+    
 
-        inventory.setMinimum_stock(minimumStockRequest.getMinimumStock());
-
-        inventoryRepository.save(inventory);
-
-
-        return new CreateMinimumStockResponse(
-                inventory.getStock(),
-                inventory.getMinimum_stock(),
-                inventory.getWardrobe().getUuid(),
-                inventory.getClothe()
-        );
+        return  response;
     }
 
 }
