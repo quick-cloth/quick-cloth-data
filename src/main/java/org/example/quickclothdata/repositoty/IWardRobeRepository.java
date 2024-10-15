@@ -48,8 +48,8 @@ public interface IWardRobeRepository extends JpaRepository<Wardrobe, UUID> {
             u.name AS name,
             u.last_name AS lastName,
             u.user_name AS userName,
-            u.points AS points,
-            s.wardrobe AS wardrobe
+            u.email AS email,
+            u.points AS points
         FROM SaleList sl
         JOIN sl.sale s
         JOIN s.user u

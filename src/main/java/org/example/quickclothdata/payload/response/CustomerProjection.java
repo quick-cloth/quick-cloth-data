@@ -9,6 +9,6 @@ public interface CustomerProjection {
     String getName();
     String getLastName();
     String getUserName();
+    String getEmail();
     String getPoints();
-    Wardrobe getWardrobe();
 }
