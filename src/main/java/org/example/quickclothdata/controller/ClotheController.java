@@ -1,6 +1,7 @@
 package org.example.quickclothdata.controller;
 
 import org.example.quickclothdata.model.Clothe;
+import org.example.quickclothdata.payload.request.ClotheByAllTypesRequest;
 import org.example.quickclothdata.service.intf.IClotheService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +29,7 @@ public class ClotheController {
     }
 
     @PostMapping("/get_by_all_types")
-    public ResponseEntity<?> getClotheByAllTypes(@RequestBody Clothe clothe){
+    public ResponseEntity<?> getClotheByAllTypes(@RequestBody ClotheByAllTypesRequest clothe){
         return ResponseEntity.ok(clotheService.findClotheByAllTypes(clothe));
     }
 

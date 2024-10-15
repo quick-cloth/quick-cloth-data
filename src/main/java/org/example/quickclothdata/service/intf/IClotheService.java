@@ -4,6 +4,8 @@ import org.example.quickclothdata.model.Clothe;
 import org.example.quickclothdata.model.TypeClothe;
 import org.example.quickclothdata.model.TypeGender;
 import org.example.quickclothdata.model.TypeStage;
+import org.example.quickclothdata.payload.request.ClotheByAllTypesRequest;
+import org.example.quickclothdata.payload.response.ClotheByAllTypesProjection;
 
 import java.util.List;
 import java.util.UUID;
@@ -21,5 +23,5 @@ public interface IClotheService {
     TypeGender findTypeGenderByUuid(UUID uuid);
     TypeClothe findTypeClotheByUuid(UUID uuid);
     TypeStage findTypeStageByUuid(UUID uuid);
-    Clothe findClotheByAllTypes(Clothe clothe);
+    ClotheByAllTypesProjection findClotheByAllTypes(ClotheByAllTypesRequest clothe);
 }

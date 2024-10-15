@@ -4,6 +4,8 @@ import org.example.quickclothdata.model.Clothe;
 import org.example.quickclothdata.model.TypeClothe;
 import org.example.quickclothdata.model.TypeGender;
 import org.example.quickclothdata.model.TypeStage;
+import org.example.quickclothdata.payload.request.ClotheByAllTypesRequest;
+import org.example.quickclothdata.payload.response.ClotheByAllTypesProjection;
 import org.example.quickclothdata.repositoty.IClotheRepository;
 import org.example.quickclothdata.repositoty.ITypeClotheRepository;
 import org.example.quickclothdata.repositoty.ITypeGenderRepository;
@@ -89,7 +91,17 @@ public class ClotheService implements IClotheService {
     }
 
     @Override
-    public Clothe findClotheByAllTypes(Clothe clothe) {
-        return clotheRepository.findByTypeGenderAndTypeClotheAndTypeStage(clothe.getTypeGender(), clothe.getTypeClothe(), clothe.getTypeStage());
+    public ClotheByAllTypesProjection findClotheByAllTypes(ClotheByAllTypesRequest clothe) {
+
+        ClotheByAllTypesProjection clothe1 = clotheRepository.findClothesByAllTypes(clothe.getTypeGenderUuid(), clothe.getTypeClotheUuid(), clothe.getTypeStageUuid());
+
+        System.out.println(clothe1.getUuid());
+        System.out.println(clothe1.getTypeClothe());
+        System.out.println(clothe1.getTypeGender());
+        System.out.println(clothe1.getTypeStage());
+        
+
+        
+        return clothe1;
     }
 }
