@@ -26,4 +26,10 @@ public class Clothe {
     @ManyToOne
     @JoinColumn(name = "type_stage_uuid")
     private TypeStage typeStage;
+    
+    public Clothe(TypeClothe typeClothe, TypeGender typeGender, TypeStage typeStage) {
+        this.typeClothe = typeClothe;
+        this.typeGender = typeGender;
+        this.typeStage = typeStage;
+    }
 }

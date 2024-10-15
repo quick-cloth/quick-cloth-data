@@ -94,13 +94,15 @@ public class ClotheService implements IClotheService {
     public ClotheByAllTypesProjection findClotheByAllTypes(ClotheByAllTypesRequest clothe) {
 
         ClotheByAllTypesProjection clothe1 = clotheRepository.findClothesByAllTypes(clothe.getTypeGenderUuid(), clothe.getTypeClotheUuid(), clothe.getTypeStageUuid());
-
-        System.out.println(clothe1.getUuid());
-        System.out.println(clothe1.getTypeClothe());
-        System.out.println(clothe1.getTypeGender());
-        System.out.println(clothe1.getTypeStage());
         
+        
+        if (clothe1 == null) {
+        TypeGender typeGender = typeGenderRepository.findById(clothe.getTypeGenderUuid()).orElse(null);
+        TypeClothe typeClothe = typeClotheRepository.findById(clothe.getTypeClotheUuid()).orElse(null);
+        TypeStage typeStage = typeStageRepository.findById(clothe.getTypeStageUuid()).orElse(null);
 
+            return (ClotheByAllTypesProjection) clotheRepository.save(new Clothe(typeClothe, typeGender, typeStage));
+        }
         
         return clothe1;
     }
