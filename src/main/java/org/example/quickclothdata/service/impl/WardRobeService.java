@@ -145,6 +145,18 @@ public class WardRobeService implements IWardRobeService {
         for(OrderList orl : orderListsConfirm){
             Inventory i = inventoryRepository.findByClotheAndWardrope(orl.getClothe().getUuid(), order.getOrder().getWardrobe().getUuid());
 
+            if (i == null){
+                i = inventoryRepository.save(
+                        Inventory.builder()
+                                .uuid(UUID.randomUUID())
+                                .clothe(orl.getClothe())
+                                .minimum_stock(0)
+                                .stock(orl.getDelivery_value())
+                                .wardrobe(order.getOrder().getWardrobe())
+                                .build()
+                );
+            }
+
             i.setStock(i.getStock() + orl.getDelivery_value());
             newInventory.add(i);
         }
