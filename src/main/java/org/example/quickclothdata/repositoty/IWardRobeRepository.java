@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -31,10 +32,11 @@ public interface IWardRobeRepository extends JpaRepository<Wardrobe, UUID> {
     JOIN c.typeGender tg ON c.typeGender.uuid = tg.uuid
     JOIN c.typeStage ts ON c.typeStage.uuid = ts.uuid
     WHERE s.wardrobe.uuid = :wardrobeUuid
+    AND s.sale_date BETWEEN :startDate AND :endDate
     GROUP BY tc.name, tg.name, ts.name
     ORDER BY quantity DESC
     """)
-    List<TopSellingClothesProjection> getTopSellingClothes(UUID wardrobeUuid);
+    List<TopSellingClothesProjection> getTopSellingClothes(UUID wardrobeUuid, LocalDate startDate, LocalDate endDate);
 
     /**
      * Find the users that have bought clothes from a wardrobe

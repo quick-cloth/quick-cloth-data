@@ -10,6 +10,7 @@ import org.example.quickclothdata.service.intf.IWardRobeService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -108,8 +109,8 @@ public class WardRobeController {
     }
 
     @GetMapping("/top_selling_clothes")
-    public ResponseEntity<?> getTopSellingClothes(@RequestParam UUID wardRobeUuid) {
-        return ResponseEntity.ok(wardRopeService.getTopSellingClothes(wardRobeUuid));
+    public ResponseEntity<?> getTopSellingClothes(@RequestParam UUID wardRobeUuid, @RequestParam(required = false) LocalDate startDate, @RequestParam(required = false) LocalDate endDate) {
+        return ResponseEntity.ok(wardRopeService.getTopSellingClothes(wardRobeUuid, startDate, endDate));
     }
     
     @GetMapping("/customers/get")

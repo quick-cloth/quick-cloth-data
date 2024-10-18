@@ -13,6 +13,7 @@ import org.example.quickclothdata.service.intf.IWardRobeService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -177,8 +178,15 @@ public class WardRobeService implements IWardRobeService {
     }
 
     @Override
-    public List<TopSellingClothesProjection> getTopSellingClothes(UUID wardrobeUuid) {
-        return wardRopeRepository.getTopSellingClothes(wardrobeUuid);
+    public List<TopSellingClothesProjection> getTopSellingClothes(UUID wardrobeUuid, LocalDate startDate, LocalDate endDate) {
+
+        // If the dates are not provided, return the top selling clothes of the last week
+        if(startDate == null || endDate == null){
+            endDate = LocalDate.now();
+            startDate = endDate.minusDays(7);
+        }
+
+        return wardRopeRepository.getTopSellingClothes(wardrobeUuid, startDate, endDate);
     }
 
     @Override
