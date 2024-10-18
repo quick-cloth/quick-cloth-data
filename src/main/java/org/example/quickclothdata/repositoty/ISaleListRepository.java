@@ -12,4 +12,9 @@ import java.util.UUID;
 public interface ISaleListRepository extends JpaRepository<SaleList, UUID> {
     @Query("SELECT sl FROM SaleList sl WHERE sl.sale.uuid = :saleUuid")
     List<SaleList> findAllBySaleUuid(UUID saleUuid);
+
+    @Query("SELECT sl FROM SaleList " +
+            "sl JOIN sl.sale s " +
+            "WHERE s.user.uuid = :userUuid")
+    List<SaleList> findAllByUserUuid(UUID userUuid);
 }

@@ -25,4 +25,9 @@ public class CampaignsController {
     public ResponseEntity<?> getActiveCampaigns() {
         return ResponseEntity.ok(campaignsService.getActiveCampaigns());
     }
+
+    @GetMapping("/get_for_user")
+    public ResponseEntity<?> getCampaignsForUser(@RequestParam UUID userUuid) {
+        return ResponseEntity.ok(campaignsService.getCampaignsForUser(userUuid));
+    }
 }
