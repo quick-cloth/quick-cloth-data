@@ -16,4 +16,10 @@ public interface ICampaignRepository extends JpaRepository<Campaign, UUID> {
             "AND (COALESCE(:startDate, c.creation_date) <= c.creation_date) " +
             "AND (COALESCE(:endDate, c.end_date) >= c.end_date)")
     List<Campaign> findAllByClotheBankUuid(UUID clotheBankUuid, LocalDate startDate, LocalDate endDate);
+
+    @Query("""
+            SELECT c FROM Campaign c
+            WHERE :date BETWEEN c.creation_date AND c.end_date
+            """)
+    List<Campaign> findAllActiveCampaigns(LocalDate date);
 }
