@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.math.BigInteger;
 import java.util.List;
 import java.util.UUID;
+import java.time.LocalDate;
 
 @Repository
 public interface IUserRepository extends JpaRepository<User, UUID> {
@@ -29,6 +30,8 @@ public interface IUserRepository extends JpaRepository<User, UUID> {
                 w as wardrobe
             FROM Sale s
             JOIN s.wardrobe w
-            WHERE s.user.uuid = :userUuid""")
-    List<SalesByUserProjection> findSalesByUser(UUID userUuid); 
+            WHERE s.user.uuid = :userUuid
+            AND s.sale_date BETWEEN :startDate AND :endDate
+            """)
+    List<SalesByUserProjection> findSalesByUser(UUID userUuid, LocalDate startDate, LocalDate endDate);
 }

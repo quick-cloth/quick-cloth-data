@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigInteger;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -140,7 +141,17 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public List<SalesByUserProjection> findSalesByUser(UUID userUuid) {
-        return userRepository.findSalesByUser(userUuid);
+    public List<SalesByUserProjection> findSalesByUser(UUID userUuid, LocalDate startDate, LocalDate endDate) {
+
+        // If the start date and end date are null search last 30 days
+        if (startDate == null && endDate == null) {
+
+            LocalDate now = LocalDate.now();
+            LocalDate last30Days = now.minusDays(30);
+            
+            return userRepository.findSalesByUser(userUuid, last30Days, now);
+        }
+
+        return userRepository.findSalesByUser(userUuid, startDate, endDate);
     }
 }

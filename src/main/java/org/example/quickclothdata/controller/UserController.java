@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigInteger;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @RestController
@@ -96,7 +97,7 @@ public class UserController {
     }
     
     @GetMapping("/sales/get")
-    public ResponseEntity<?> getSalesByCustomer(@RequestParam UUID userUuid) {
-        return ResponseEntity.ok(userService.findSalesByUser(userUuid));
+    public ResponseEntity<?> getSalesByCustomer(@RequestParam UUID userUuid, @RequestParam(required = false) LocalDate startDate, @RequestParam(required = false) LocalDate endDate) {
+        return ResponseEntity.ok(userService.findSalesByUser(userUuid, startDate, endDate));
     }
 }

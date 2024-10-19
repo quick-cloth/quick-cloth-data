@@ -7,6 +7,7 @@ import org.example.quickclothdata.payload.request.WardrobeEmployeeRequest;
 import org.example.quickclothdata.payload.response.SalesByUserProjection;
 
 import java.math.BigInteger;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -28,5 +29,5 @@ public interface IUserService {
     TypeDocument findTypeDocumentByUUID(UUID uuid);
     WardRobeEmployee findWarRobeEmployeeByUsername(String username);
     BankEmployee findBankEmployeeByUsername(String username);
-    List<SalesByUserProjection> findSalesByUser(UUID userUuid);
+    List<SalesByUserProjection> findSalesByUser(UUID userUuid, LocalDate startDate, LocalDate endDate);
 }
