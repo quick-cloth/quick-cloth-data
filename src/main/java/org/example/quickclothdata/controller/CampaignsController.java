@@ -3,10 +3,7 @@ package org.example.quickclothdata.controller;
 import org.example.quickclothdata.service.intf.ICampaignsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
@@ -29,5 +26,11 @@ public class CampaignsController {
     @GetMapping("/get_for_user")
     public ResponseEntity<?> getCampaignsForUser(@RequestParam UUID userUuid) {
         return ResponseEntity.ok(campaignsService.getCampaignsForUser(userUuid));
+    }
+    
+    @DeleteMapping("/campaign/{campaignUuid}")
+    public ResponseEntity<?> deleteCampaign(@PathVariable UUID campaignUuid) {
+        campaignsService.deleteCampaign(campaignUuid);
+        return ResponseEntity.noContent().build();
     }
 }

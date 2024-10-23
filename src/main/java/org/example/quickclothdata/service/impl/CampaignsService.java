@@ -58,4 +58,9 @@ public class CampaignsService implements ICampaignsService {
         }).collect(Collectors.toList());
 
     }
+
+    @Override
+    public void deleteCampaign(UUID campaignUuid) {
+        campaignRepository.deleteById(campaignUuid);
+    }
 }

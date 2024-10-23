@@ -8,4 +8,5 @@ import java.util.UUID;
 public interface ICampaignsService {
     List<Campaign> getActiveCampaigns();
     List<Campaign> getCampaignsForUser(UUID userUuid);
+    void deleteCampaign(UUID campaignUuid);
 }
